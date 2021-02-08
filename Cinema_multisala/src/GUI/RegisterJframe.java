@@ -1,5 +1,4 @@
 package GUI;
-import java.awt.BorderLayout;
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Font;
@@ -11,7 +10,9 @@ import javax.swing.JTextField;
 import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
+import Controllers.Controller;
 import DAO.UserPostgreDAO;
+import Entity.User;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -51,6 +52,8 @@ public class RegisterJframe extends JFrame {
 	 * Create the frame.
 	 */
 	public RegisterJframe() {
+		Controller contruser = new Controller();
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
 		setTitle("Register here");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -78,9 +81,9 @@ public class RegisterJframe extends JFrame {
 				String ConfirmPassword = new String(passwordConfirmPassword.getPassword());
 				String Email = textFieldEmail.getText();
 				if(Password.equals(ConfirmPassword)) {
-					UserPostgreDAO usDAO = new UserPostgreDAO();
 					if(checkEmail(Email)) {
-						usDAO.addUser(User, Password, Email);
+						User user = new User(User, Password, Email);
+						contruser.addInfoUser(user);
 						LoginJframe login = new LoginJframe();
 						login.setVisible(true);
 						setVisible(false);

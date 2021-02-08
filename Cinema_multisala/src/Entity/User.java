@@ -1,8 +1,17 @@
 package Entity;
 
 public class User {
+	
 	private String user;
 	private String email;
+	private String password;
+	
+	public User(String user,  String password,String email) {
+		super();
+		this.user = user;
+		this.email = email;
+		this.password = password;
+	}
 	public String getUser() {
 		return user;
 	}
@@ -21,5 +30,5 @@ public class User {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	private String password;
+
 }

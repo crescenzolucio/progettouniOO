@@ -6,6 +6,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import Controllers.Controller;
 import DAO.UserPostgreDAO;
 
 import javax.swing.JTextField;
@@ -43,6 +44,8 @@ public class LoginJframe extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginJframe() {
+		Controller contruser = new Controller();
+		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
 		setTitle("Cinema multisala");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
@@ -71,10 +74,11 @@ public class LoginJframe extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String User = textFieldUser.getText();
 				String Password = new String(passwordField.getPassword());
-				UserPostgreDAO usDAO = new UserPostgreDAO();
-				if(usDAO.findUser(User)) {
-					if(usDAO.checkPassword(User, Password)){
-						JOptionPane.showMessageDialog(null,"Login ok!");
+				if(contruser.searchUser(User)) {
+					if(contruser.checkPasswordUser(User, Password)){
+						ProjectionsJframe projectionJF = new ProjectionsJframe();
+						projectionJF.setVisible(true);
+						dispose();
 					}else {
 						JOptionPane.showMessageDialog(null,"Wrong password!");						
 					}

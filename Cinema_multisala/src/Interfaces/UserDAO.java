@@ -1,7 +1,5 @@
 package Interfaces;
 
-import Entity.User;
-
 public interface UserDAO {
     public boolean findUser(String user);
     public boolean checkPassword(String user,String password);

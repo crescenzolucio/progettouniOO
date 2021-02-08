@@ -22,8 +22,7 @@ public class UserPostgreDAO implements UserDAO{
             if (!rs.next()) { 
             	System.out.println("No records found");
 			}else {
-				System.out.println("Utente trovato");
-				
+				System.out.println("User found");
 				check = true;
 			}
         } catch(SQLException ex) {
