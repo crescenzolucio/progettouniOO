@@ -3,28 +3,35 @@ package Entity;
 import java.sql.Timestamp;
 
 public class Projection {
-	private Timestamp inizioproiezione;
-	private Timestamp fineproiezione;
-	private Integer prezzo;
+	private Integer idpj;
+	private Timestamp startpj;
+	private Timestamp endpj;
+	private Integer price;
 	private Integer idfilm;
 	private Integer idsala;
-	public Timestamp getInizioproiezione() {
-		return inizioproiezione;
+	public Integer getIdpj() {
+		return idpj;
 	}
-	public void setInizioproiezione(Timestamp inizioproiezione) {
-		this.inizioproiezione = inizioproiezione;
+	public void setIdpj(Integer idpj) {
+		this.idpj = idpj;
 	}
-	public Timestamp getFineproiezione() {
-		return fineproiezione;
+	public Timestamp getStartpj() {
+		return startpj;
 	}
-	public void setFineproiezione(Timestamp fineproiezione) {
-		this.fineproiezione = fineproiezione;
+	public void setStartpj(Timestamp startpj) {
+		this.startpj = startpj;
 	}
-	public Integer getPrezzo() {
-		return prezzo;
+	public Timestamp getEndpj() {
+		return endpj;
 	}
-	public void setPrezzo(Integer prezzo) {
-		this.prezzo = prezzo;
+	public void setEndpj(Timestamp endpj) {
+		this.endpj = endpj;
+	}
+	public Integer getPrice() {
+		return price;
+	}
+	public void setPrice(Integer price) {
+		this.price = price;
 	}
 	public Integer getIdfilm() {
 		return idfilm;
@@ -32,22 +39,19 @@ public class Projection {
 	public void setIdfilm(Integer idfilm) {
 		this.idfilm = idfilm;
 	}
-	public Projection(Timestamp inizioproiezione, Timestamp fineproiezione, Integer prezzo, Integer idfilm,
-			Integer idsala) {
-		super();
-		this.inizioproiezione = inizioproiezione;
-		this.fineproiezione = fineproiezione;
-		this.prezzo = prezzo;
-		this.idfilm = idfilm;
-		this.idsala = idsala;
-	}
-	public Projection() {
-		// TODO Auto-generated constructor stub
-	}
 	public Integer getIdsala() {
 		return idsala;
 	}
 	public void setIdsala(Integer idsala) {
+		this.idsala = idsala;
+	}
+	public Projection(Integer idpj, Timestamp startpj, Timestamp endpj, Integer price, Integer idfilm, Integer idsala) {
+		super();
+		this.idpj = idpj;
+		this.startpj = startpj;
+		this.endpj = endpj;
+		this.price = price;
+		this.idfilm = idfilm;
 		this.idsala = idsala;
 	}
 }

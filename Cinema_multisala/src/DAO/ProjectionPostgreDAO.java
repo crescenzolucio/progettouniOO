@@ -21,18 +21,37 @@ public class ProjectionPostgreDAO implements ProjectionDAO{
             ResultSet rs =  ps.executeQuery();
 
             while (rs.next()) {
-            	  Timestamp inizioproiezione = rs.getTimestamp("inizio_proiezione");
-            	  Timestamp fineproiezione = rs.getTimestamp("fine_proiezione");
-            	  Integer prezzo = rs.getInt("prezzo");
+            	  Timestamp startprojection = rs.getTimestamp("inizio_proiezione");
+            	  Timestamp endprojection = rs.getTimestamp("fine_proiezione");
+            	  Integer price = rs.getInt("prezzo");
             	  Integer film = rs.getInt("id_film");
-            	  Integer sala = rs.getInt("id_sala");
+            	  Integer room = rs.getInt("id_sala");
+            	  Integer idpj = rs.getInt("id_proiezione");
 
-            	  Projection pj = new Projection(inizioproiezione,fineproiezione,prezzo,film,sala);
+            	  Projection pj = new Projection(idpj,startprojection,endprojection,price,film,room);
 
             	  list.add(pj);
             	}
         } catch(SQLException ex) {
         }
 		return list;
+	}
+	
+	public Integer countOccupiedSeatsInProjection(Integer id_projection) {
+		String Query = "select count(*) from biglietti b where b.id_proiezione="+id_projection;
+		Connectiondb connection_db =new Connectiondb();
+        Connection con=connection_db.get_connection();
+        Integer count = 0;
+        try {
+            PreparedStatement ps = con.prepareStatement(Query);
+            ResultSet rs =  ps.executeQuery();
+            if (!rs.next()) { 
+            	System.out.println("No projection found!");
+			}else {
+				count=rs.getInt("count");
+			}
+        } catch(SQLException ex) {
+        }
+		return count;
 	}
 }

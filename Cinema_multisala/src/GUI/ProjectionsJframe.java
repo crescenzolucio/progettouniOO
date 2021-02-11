@@ -29,6 +29,11 @@ import javax.swing.JOptionPane;
 public class ProjectionsJframe extends JFrame {
 
 	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1L;
+
+	/**
 	 * Launch the application.
 	 */
 	public static void main(String[] args) {
@@ -68,39 +73,73 @@ public class ProjectionsJframe extends JFrame {
 		
 		DefaultTableModel model = new DefaultTableModel();
 
-		String[] columnNames = {"Film","Start","End","Room","Price","Seats","Buy"};
+		String[] columnNames = {"Film","Start","End","Room","Price","Seats","Buy",""};
 		model.setColumnIdentifiers(columnNames);
 		
 		LinkedList<Projection> list= (LinkedList<Projection>) contruser.findProjections();
 		for (Projection pj : list) {
-			  Object[] obj = new Object[7];
+			  Object[] obj = new Object[8];
+			  Integer notavailable = contruser.seatsNotAvailableProjection(pj.getIdpj());
+			  Integer roomseats = contruser.nameRoom(pj.getIdsala()).getPosti();
 			  obj[0] = contruser.nameFilm(pj.getIdfilm());
-			  obj[1] = new SimpleDateFormat("yyyy-MM-dd hh:mm").format(pj.getInizioproiezione());
-			  obj[2] = new SimpleDateFormat("yyyy-MM-dd hh:mm").format(pj.getFineproiezione());
+			  obj[1] = new SimpleDateFormat("yyyy-MM-dd hh:mm").format(pj.getStartpj());
+			  obj[2] = new SimpleDateFormat("yyyy-MM-dd hh:mm").format(pj.getEndpj());
 			  obj[3] = contruser.nameRoom(pj.getIdsala()).getDescrizione();
-			  obj[4] = pj.getPrezzo()+"€";
-			  obj[5] = contruser.nameRoom(pj.getIdsala()).getPosti();
-			  obj[6] = "Buy";
+			  obj[4] = pj.getPrice()+"€";
+			  obj[5] = notavailable+"/"+roomseats;
+			  if(notavailable.equals(roomseats)) {
+				  obj[6] = "SOLD OUT";
+			  }else {
+				  obj[6] = "BUY";  				  
+			  }
+			  obj[7] = pj.getIdpj();
 			  model.addRow(obj);
 			}
 		
 		//Jtable not editable
-		@SuppressWarnings("serial")
 		JTable table = new JTable(model){  
-			public boolean isCellEditable(int row,int column){  
-				return column == 6 ? true : false;
+			/****/
+			private static final long serialVersionUID = 1L;
+
+			public boolean isCellEditable(int row,int column){
+		        Object value = getModel().getValueAt(row, column);
+				return column == 6 && value.equals("BUY") ? true : false;
 		    }  
-        };     
+        };
+        //change rendere
+        table.setDefaultRenderer(Object.class, new MyTableCellRender());
+        
+        //Width
+        table.getColumnModel().getColumn(6).setMaxWidth(120);
+        table.getColumnModel().getColumn(6).setMinWidth(120);
+        table.getColumnModel().getColumn(5).setMaxWidth(60);
+        table.getColumnModel().getColumn(5).setMinWidth(60);
+        table.getColumnModel().getColumn(4).setMaxWidth(60);
+        table.getColumnModel().getColumn(4).setMinWidth(60);
+        table.getColumnModel().getColumn(0).setMinWidth(350);
+        table.getColumnModel().getColumn(0).setMaxWidth(350);
+        
+        //No drag
+        table.getTableHeader().setReorderingAllowed(false);
+        
+        //Invisible Column
+        table.getColumnModel().getColumn(7).setMinWidth(0);
+        table.getColumnModel().getColumn(7).setMaxWidth(0);
+        
         //Action table button
         Action delete = new AbstractAction(){
-            public void actionPerformed(ActionEvent e){
+            /****/
+			private static final long serialVersionUID = 1L;
+
+			public void actionPerformed(ActionEvent e){
             	String film = table.getValueAt(table.getSelectedRow(), 0).toString();
             	String projectionstart = table.getValueAt(table.getSelectedRow(), 1).toString();
             	String projectionend = table.getValueAt(table.getSelectedRow(), 2).toString();
             	String room = table.getValueAt(table.getSelectedRow(), 3).toString();
             	String price = table.getValueAt(table.getSelectedRow(), 4).toString();
-            	Integer seats = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 5).toString());
-            	TicketJframe ticket = new TicketJframe(price,film,room,projectionstart,projectionend,seats);	
+            	Integer seats = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 5).toString().split("/")[0])+1;
+            	Integer idpj = Integer.parseInt(table.getValueAt(table.getSelectedRow(), 7).toString());
+            	TicketJframe ticket = new TicketJframe(idpj,price,film,room,projectionstart,projectionend,seats);	
             	ticket.setVisible(true);
             	dispose();
             }
