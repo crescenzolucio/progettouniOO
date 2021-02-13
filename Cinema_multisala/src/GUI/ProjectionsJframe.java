@@ -25,6 +25,7 @@ import ImportedClass.ButtonColumn;
 
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
+import java.awt.event.ActionListener;
 
 public class ProjectionsJframe extends JFrame {
 
@@ -64,11 +65,22 @@ public class ProjectionsJframe extends JFrame {
 		JMenuBar menuBar = new JMenuBar();
 		setJMenuBar(menuBar);
 		
-		JMenuItem mntmNewMenuItem_1 = new JMenuItem("New menu item");
-		menuBar.add(mntmNewMenuItem_1);
+		JMenuItem mntmFilms = new JMenuItem("Films");
 		
-		JMenuItem mntmNewMenuItem = new JMenuItem("New menu item");
-		menuBar.add(mntmNewMenuItem);
+		mntmFilms.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				FilmsJframe filmsjf = new FilmsJframe();
+				filmsjf.setVisible(true);
+				dispose();
+			}
+		});
+		menuBar.add(mntmFilms);
+		
+		JMenuItem mntmRooms = new JMenuItem("Rooms");
+		menuBar.add(mntmRooms);
+		
+		JMenuItem mntmProjection = new JMenuItem("Projections");
+		menuBar.add(mntmProjection);
 		getContentPane().setSize(getWidth(),getHeight());
 		
 		DefaultTableModel model = new DefaultTableModel();
@@ -106,8 +118,8 @@ public class ProjectionsJframe extends JFrame {
 				return column == 6 && value.equals("BUY") ? true : false;
 		    }  
         };
-        //change rendere
-        table.setDefaultRenderer(Object.class, new MyTableCellRender());
+        //change renderer
+        //table.setDefaultRenderer(Object.class, new MyTableCellRender());
         
         //Width
         table.getColumnModel().getColumn(6).setMaxWidth(120);
@@ -152,7 +164,7 @@ public class ProjectionsJframe extends JFrame {
 		JScrollPane scrollPane = new JScrollPane(table);
 		scrollPane.setBackground(Color.GRAY);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
-		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_ALWAYS);
+		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(0, 0,getWidth(),getHeight());
 		getContentPane().add(scrollPane);	
 	}

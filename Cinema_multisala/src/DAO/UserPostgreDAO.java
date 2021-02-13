@@ -12,12 +12,13 @@ import Interfaces.UserDAO;
 public class UserPostgreDAO implements UserDAO{
 
 	public boolean findUser(String user) {
-		String Query = "Select * from utenti u where u.username='"+user+"'";
+		String Query = "Select * from utenti u where u.username=?";
 		Connectiondb connection_db =new Connectiondb();
         Connection con=connection_db.get_connection();
         boolean check = false;
         try {
             PreparedStatement ps = con.prepareStatement(Query);
+            ps.setString(1, user);
             ResultSet rs =  ps.executeQuery();
             if (!rs.next()) { 
             	System.out.println("No records found");
@@ -31,12 +32,13 @@ public class UserPostgreDAO implements UserDAO{
 	}
 
 	public boolean checkPassword(String user,String password) {
-		String Query = "Select * from utenti u where u.username='"+user+"'";
+		String Query = "Select * from utenti u where u.username=?";
 		Connectiondb connection_db =new Connectiondb();
         Connection con=connection_db.get_connection();
         boolean check = false;
         try {
             PreparedStatement ps = con.prepareStatement(Query);
+            ps.setString(1, user);
             ResultSet rs =  ps.executeQuery();
             if (!rs.next()) { 
             	System.out.println("No records found");

@@ -7,6 +7,7 @@ import DAO.ProjectionPostgreDAO;
 import DAO.RoomPostgreDAO;
 import DAO.TicketPostgreDAO;
 import DAO.UserPostgreDAO;
+import Entity.Film;
 import Entity.Projection;
 import Entity.Room;
 import Entity.Ticket;
@@ -53,5 +54,13 @@ public class Controller {
 	public Integer lastTicket() {
 		TicketDAO ticketDAO = new TicketPostgreDAO();
 		return ticketDAO.lastTicket();
+	}
+	public List<Film> getFilms(){
+		FilmDAO filmDAO = new FilmPostgreDAO();
+		return filmDAO.getFilms();
+	}
+	public Integer deleteFilm(Integer idfilm){
+		FilmDAO filmDAO = new FilmPostgreDAO();
+		return filmDAO.deleteFilm(idfilm);
 	}
 }

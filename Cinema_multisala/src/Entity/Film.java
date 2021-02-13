@@ -1,12 +1,18 @@
 package Entity;
 
 public class Film {
+	private Integer id_film;
 	private String titolo;
 	private Integer anno_produzione;
 	private Integer id_registra;
 	private Integer durata_minuti;
 	private String url_poster;
-	
+	public Integer getId_film() {
+		return id_film;
+	}
+	public void setId_film(Integer id_film) {
+		this.id_film = id_film;
+	}
 	public String getTitolo() {
 		return titolo;
 	}
@@ -37,12 +43,16 @@ public class Film {
 	public void setUrl_poster(String url_poster) {
 		this.url_poster = url_poster;
 	}
-	public Film(String titolo, Integer anno_produzione, Integer id_registra, Integer durata_minuti, String url_poster) {
+	public Film(Integer id_film, String titolo, Integer anno_produzione, Integer id_registra, Integer durata_minuti,
+			String url_poster) {
 		super();
+		this.id_film = id_film;
 		this.titolo = titolo;
 		this.anno_produzione = anno_produzione;
 		this.id_registra = id_registra;
 		this.durata_minuti = durata_minuti;
 		this.url_poster = url_poster;
 	}
+	
+	
 }
