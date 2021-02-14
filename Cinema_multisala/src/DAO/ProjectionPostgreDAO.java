@@ -32,6 +32,7 @@ public class ProjectionPostgreDAO implements ProjectionDAO{
 
             	  list.add(pj);
             	}
+            con.close();
         } catch(SQLException ex) {
         }
 		return list;
@@ -50,6 +51,7 @@ public class ProjectionPostgreDAO implements ProjectionDAO{
 			}else {
 				count=rs.getInt("count");
 			}
+            con.close();
         } catch(SQLException ex) {
         }
 		return count;

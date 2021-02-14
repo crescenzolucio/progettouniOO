@@ -2,16 +2,22 @@ package Controllers;
 
 import java.util.List;
 
+import DAO.ActorPostgreDAO;
+import DAO.DirectorPostgreDAO;
 import DAO.FilmPostgreDAO;
 import DAO.ProjectionPostgreDAO;
 import DAO.RoomPostgreDAO;
 import DAO.TicketPostgreDAO;
 import DAO.UserPostgreDAO;
+import Entity.Actor;
+import Entity.Director;
 import Entity.Film;
 import Entity.Projection;
 import Entity.Room;
 import Entity.Ticket;
 import Entity.User;
+import Interfaces.ActorDAO;
+import Interfaces.DirectorDAO;
 import Interfaces.FilmDAO;
 import Interfaces.ProjectionDAO;
 import Interfaces.RoomDAO;
@@ -62,5 +68,21 @@ public class Controller {
 	public Integer deleteFilm(Integer idfilm){
 		FilmDAO filmDAO = new FilmPostgreDAO();
 		return filmDAO.deleteFilm(idfilm);
+	}
+	public List<Director> findDirectors(){
+		DirectorDAO directorDAO = new DirectorPostgreDAO();
+		return directorDAO.findDirectors();
+	}
+	public List<Actor> findActors(){
+		ActorDAO actorDao = new ActorPostgreDAO();
+		return actorDao.findActors();
+	}
+	public boolean insertFilm(Film film) {
+		FilmDAO filmDAO = new FilmPostgreDAO();
+		return filmDAO.insertFilm(film);
+	}
+	public Director findDirector(Integer iddirector) {
+		DirectorDAO directorDAO = new DirectorPostgreDAO();
+		return directorDAO.findDirector(iddirector);
 	}
 }

@@ -26,6 +26,7 @@ public class UserPostgreDAO implements UserDAO{
 				System.out.println("User found");
 				check = true;
 			}
+            con.close();
         } catch(SQLException ex) {
         }
 		return check;
@@ -47,6 +48,7 @@ public class UserPostgreDAO implements UserDAO{
 					check = true;
 				}
 			}
+            con.close();
         } catch(SQLException ex) {
         }
 		return check;

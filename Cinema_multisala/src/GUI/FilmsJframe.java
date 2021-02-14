@@ -20,6 +20,7 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import Controllers.Controller;
+import Entity.Director;
 import Entity.Film;
 import ImportedClass.ButtonColumn;
 
@@ -76,7 +77,7 @@ public class FilmsJframe extends JFrame {
 			  Object[] obj = new Object[6];
 			  obj[0] = film.getTitolo();
 			  obj[1] = film.getAnno_produzione();
-			  obj[2] = film.getId_registra();
+			  obj[2] = film.getRegistaname();
 			  obj[3] = film.getDurata_minuti();
 			  obj[4] = "DELETE";
 			  obj[5] = film.getId_film();
@@ -124,9 +125,11 @@ public class FilmsJframe extends JFrame {
 				String text = "Do you want to delete the film?";
 				if(JOptionPane.showConfirmDialog(null, text, "Delete film", 0, 1, null) == 0) {
 					Integer idfilm =  Integer.parseInt(table.getValueAt(table.getSelectedRow(),5).toString());
+					sorter.setRowFilter(null);
+					model.removeRow(table.getSelectedRow());
 					if(contruser.deleteFilm(idfilm) > 0) {
-						model.removeRow(table.getSelectedRow());
 						JOptionPane.showMessageDialog(null , "Deleted successfully");
+						textFieldFilter.setText("");
 					}else {
 						JOptionPane.showMessageDialog(null , "Nothing deleted");
 					}
@@ -162,23 +165,32 @@ public class FilmsJframe extends JFrame {
 		btnNewFilm.setBounds(388, -1, 89, 23);
 		getContentPane().add(btnNewFilm);
 		
+		JButton btnUndo = new JButton("Undo");
+		btnUndo.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ProjectionsJframe pjframe =  new ProjectionsJframe();
+				pjframe.setVisible(true);
+				dispose();
+			}
+		});
+		btnUndo.setBounds(487, -1, 89, 23);
+		getContentPane().add(btnUndo);
+		
+		//Filter
 		JLabel lblFilter = new JLabel("Filter");
 		lblFilter.setBounds(10, 3, 46, 14);
 		getContentPane().add(lblFilter);
 		textFieldFilter.getDocument().addDocumentListener(new DocumentListener() {
-
 			@Override
 			public void insertUpdate(DocumentEvent e) {
 				// TODO Auto-generated method stub
 				filter();
 			}
-
 			@Override
 			public void removeUpdate(DocumentEvent e) {
 				// TODO Auto-generated method stub
 				filter();
 			}
-
 			@Override
 			public void changedUpdate(DocumentEvent e) {
 				// TODO Auto-generated method stub
@@ -186,7 +198,7 @@ public class FilmsJframe extends JFrame {
 			}
 		    // implement the methods
 			public void filter() {
-				sorter.setRowFilter(RowFilter.regexFilter(textFieldFilter.getText()));
+				sorter.setRowFilter(RowFilter.regexFilter("(?i)" +textFieldFilter.getText()));
 			}
 		});
 	}

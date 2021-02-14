@@ -8,9 +8,16 @@ import java.awt.Toolkit;
 import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
+
+import Controllers.Controller;
+import Entity.Actor;
+import Entity.Director;
+import Entity.Film;
+
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JList;
+import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import javax.swing.JFormattedTextField;
 import java.awt.event.KeyAdapter;
@@ -18,6 +25,11 @@ import java.awt.event.KeyEvent;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
+import javax.swing.JPopupMenu;
+import java.awt.Component;
+import java.awt.event.MouseAdapter;
+import java.awt.event.MouseEvent;
+import javax.swing.JComboBox;
 
 public class InsertFilmJframe extends JFrame {
 
@@ -45,6 +57,7 @@ public class InsertFilmJframe extends JFrame {
 	 * Create the frame.
 	 */
 	public InsertFilmJframe() {
+		Controller controller =  new Controller();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -62,11 +75,11 @@ public class InsertFilmJframe extends JFrame {
 		contentPane.add(lblTilte);
 		
 		JLabel lblActors = new JLabel("Actors");
-		lblActors.setBounds(104, 172, 46, 14);
+		lblActors.setBounds(104, 172, 77, 14);
 		contentPane.add(lblActors);
 		
 		JLabel lblProducer = new JLabel("Producer");
-		lblProducer.setBounds(104, 293, 46, 14);
+		lblProducer.setBounds(104, 236, 77, 14);
 		contentPane.add(lblProducer);
 		
 		JLabel lblYear = new JLabel("Year");
@@ -74,20 +87,8 @@ public class InsertFilmJframe extends JFrame {
 		contentPane.add(lblYear);
 		
 		JLabel lblDuration = new JLabel("Duration");
-		lblDuration.setBounds(397, 293, 89, 14);
+		lblDuration.setBounds(397, 236, 89, 14);
 		contentPane.add(lblDuration);
-		
-		JList listProducer = new JList();
-		listProducer.setBounds(191, 293, 139, 20);
-		contentPane.add(listProducer);
-		
-		JList listActors = new JList();
-		listActors.setBounds(191, 171, 139, 20);
-		contentPane.add(listActors);
-		
-		JButton btnInsert = new JButton("Insert");
-		btnInsert.setBounds(187, 371, 89, 23);
-		contentPane.add(btnInsert);
 		
 		JButton btnUndo = new JButton("Undo");
 		btnUndo.addActionListener(new ActionListener() {
@@ -97,12 +98,12 @@ public class InsertFilmJframe extends JFrame {
 				dispose();
 			}
 		});
-		btnUndo.setBounds(397, 371, 89, 23);
+		btnUndo.setBounds(397, 314, 89, 23);
 		contentPane.add(btnUndo);
 		
 		JLabel lblInvalidDuration = new JLabel("");
 		lblInvalidDuration.setForeground(Color.RED);
-		lblInvalidDuration.setBounds(492, 313, 181, 14);
+		lblInvalidDuration.setBounds(492, 256, 181, 14);
 		contentPane.add(lblInvalidDuration);
 		
 		textFieldDuration = new JTextField();
@@ -118,7 +119,7 @@ public class InsertFilmJframe extends JFrame {
 			}
 		});
 		textFieldDuration.setColumns(10);
-		textFieldDuration.setBounds(492, 290, 86, 20);
+		textFieldDuration.setBounds(492, 233, 86, 20);
 		contentPane.add(textFieldDuration);
 		
 		JLabel lblInvalidNumber = new JLabel("");
@@ -140,12 +141,46 @@ public class InsertFilmJframe extends JFrame {
 			}
 		});
 		textFieldYear.setBounds(492, 169, 86, 20);
-
 		contentPane.add(textFieldYear);
 		
+		JComboBox<String> comboBoxDirector = new JComboBox(controller.findDirectors().toArray());
+		comboBoxDirector.setBounds(187, 232, 143, 22);
+		comboBoxDirector.setEditable(false);
+		contentPane.add(comboBoxDirector);
+		
+		JComboBox<String> comboBoxActors = new JComboBox(controller.findActors().toArray());
+		comboBoxActors.setEditable(false);
+		comboBoxActors.setBounds(187, 168, 143, 22);
+		contentPane.add(comboBoxActors);
+		
+		JButton btnInsert = new JButton("Insert");
+		btnInsert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!textFieldYear.getText().equals("") && !textFieldDuration.getText().equals("")  && !textFieldtitle.getText().equals("") 
+						&& lblInvalidNumber.getText().equals("") && lblInvalidDuration.getText().equals("")) {
+				Film film = new Film();
+				film.setAnno_produzione(Integer.parseInt(textFieldYear.getText()));
+				film.setDurata_minuti(Integer.parseInt(textFieldDuration.getText()));
+				
+				Object itemActor = comboBoxActors.getSelectedItem();
+				Object itemDirector = comboBoxDirector.getSelectedItem();
+				film.setId_registra(((Director)itemDirector).getId_director());
+				
+				film.setUrl_poster("");
+				film.setTitolo(textFieldtitle.getText());
+				if(controller.insertFilm(film)) {
+						JOptionPane.showMessageDialog(null, "Film created!");
+						textFieldYear.setText(""); textFieldYear.setText(""); textFieldDuration.setText(""); textFieldtitle.setText("");
+						comboBoxActors.setSelectedIndex(0); comboBoxDirector.setSelectedIndex(0);
+					}
+				}else JOptionPane.showMessageDialog(null, "Enter all parameters correctly!");
+			}
+		});
+		btnInsert.setBounds(187, 314, 89, 23);
+		contentPane.add(btnInsert);
 
 	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	    setSize(728, 516);
+	    setSize(729, 420);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
 		setTitle("Insert Film");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);

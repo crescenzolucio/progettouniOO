@@ -5,6 +5,7 @@ public class Film {
 	private String titolo;
 	private Integer anno_produzione;
 	private Integer id_registra;
+	private String registaname;
 	private Integer durata_minuti;
 	private String url_poster;
 	public Integer getId_film() {
@@ -43,6 +44,12 @@ public class Film {
 	public void setUrl_poster(String url_poster) {
 		this.url_poster = url_poster;
 	}
+	public String getRegistaname() {
+		return registaname;
+	}
+	public void setRegistaname(String registaname) {
+		this.registaname = registaname;
+	}
 	public Film(Integer id_film, String titolo, Integer anno_produzione, Integer id_registra, Integer durata_minuti,
 			String url_poster) {
 		super();
@@ -53,6 +60,7 @@ public class Film {
 		this.durata_minuti = durata_minuti;
 		this.url_poster = url_poster;
 	}
+	public Film() {}
 	
 	
 }

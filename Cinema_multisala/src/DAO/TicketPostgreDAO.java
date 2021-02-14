@@ -41,6 +41,7 @@ public class TicketPostgreDAO implements TicketDAO{
             ResultSet rs =  ps.executeQuery();
 
             if(rs.next()) return rs.getInt("max");
+            con.close();
         } catch(SQLException ex) {
         	ex.printStackTrace();
         }

@@ -26,6 +26,8 @@ import ImportedClass.ButtonColumn;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
+import javax.swing.JCheckBoxMenuItem;
+import javax.swing.JMenu;
 
 public class ProjectionsJframe extends JFrame {
 
@@ -81,6 +83,18 @@ public class ProjectionsJframe extends JFrame {
 		
 		JMenuItem mntmProjection = new JMenuItem("Projections");
 		menuBar.add(mntmProjection);
+		
+		JMenu mnStats = new JMenu("Stats");
+		menuBar.add(mnStats);
+		
+		JMenuItem mntmProfitableShows = new JMenuItem("Profitable shows");
+		mnStats.add(mntmProfitableShows);
+		
+		JMenuItem mntmPrimeTime = new JMenuItem("Prime Time");
+		mnStats.add(mntmPrimeTime);
+		
+		JMenuItem mntmPrimeTimeRooms = new JMenuItem("Prime Time Rooms");
+		mnStats.add(mntmPrimeTimeRooms);
 		getContentPane().setSize(getWidth(),getHeight());
 		
 		DefaultTableModel model = new DefaultTableModel();
@@ -162,7 +176,7 @@ public class ProjectionsJframe extends JFrame {
         buttonColumn.setMnemonic(KeyEvent.VK_D);
 		table.setSize(getWidth(),getHeight());
 		JScrollPane scrollPane = new JScrollPane(table);
-		scrollPane.setBackground(Color.GRAY);
+		scrollPane.setBackground(Color.WHITE);
 		scrollPane.setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_ALWAYS);
 		scrollPane.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
 		scrollPane.setBounds(0, 0,getWidth(),getHeight());

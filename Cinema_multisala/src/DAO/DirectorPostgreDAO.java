@@ -1,0 +1,60 @@
+package DAO;
+
+import java.sql.Connection;
+import java.sql.PreparedStatement;
+import java.sql.ResultSet;
+import java.sql.SQLException;
+import java.util.Date;
+import java.util.LinkedList;
+
+import Entity.Actor;
+import Entity.Director;
+import Interfaces.DirectorDAO;
+
+public class DirectorPostgreDAO implements DirectorDAO{
+	public LinkedList<Director> findDirectors() {
+		String Query = "SELECT * FROM registi r order  by r.nominativo asc";
+		Connectiondb connection_db =new Connectiondb();
+        Connection con=connection_db.get_connection();
+        LinkedList<Director> list = new LinkedList<Director>();
+        try {
+            PreparedStatement ps = con.prepareStatement(Query);
+            ResultSet rs =  ps.executeQuery();
+            while (rs.next()) {
+          	  Integer idactor = rs.getInt("id_regista");
+          	  String name = rs.getString("nominativo");
+          	  Integer country = rs.getInt("paese_di_origine");
+          	  Date birth = rs.getDate("data_nascita");
+          	  Director director = new Director(idactor,name,country.toString(),birth);
+          	  list.add(director);
+            }
+            con.close();
+        } catch(SQLException ex) {
+        	ex.printStackTrace();
+        }
+		return list;
+	}
+	
+	public Director findDirector(Integer iddirector) {
+		String Query = "SELECT r.id_regista,r.nominativo,(select p.paese from paesi p where p.id_paese=r.paese_di_origine::smallint),r.data_nascita FROM registi r  where r.id_regista=?";
+		Connectiondb connection_db =new Connectiondb();
+        Connection con=connection_db.get_connection();
+        Director director = new Director();
+        try {
+            PreparedStatement ps = con.prepareStatement(Query);
+            ps.setInt(1, iddirector);
+            ResultSet rs =  ps.executeQuery();
+            if (!rs.next()) { 
+            	  director.setName(rs.getString("nominativo"));
+            	  director.setId_director(rs.getInt("id_regista"));
+            	  director.setCountry(rs.getString("paese"));
+            	  director.setDateofbirth(rs.getDate("data_nascita"));
+            	}
+            con.close();
+        } catch(SQLException ex) {
+        	ex.printStackTrace();
+        }
+		return director;
+	}
+	
+}
