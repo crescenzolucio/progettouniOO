@@ -79,21 +79,56 @@ public class ProjectionsJframe extends JFrame {
 		menuBar.add(mntmFilms);
 		
 		JMenuItem mntmRooms = new JMenuItem("Rooms");
+		mntmRooms.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				RoomJframe roomjf = new RoomJframe();
+				roomjf.setVisible(true);
+				dispose();
+			}
+		});
 		menuBar.add(mntmRooms);
 		
 		JMenuItem mntmProjection = new JMenuItem("Projections");
+		mntmProjection.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				ProjectionJframe projfj = new ProjectionJframe();
+				projfj.setVisible(true);
+				dispose();
+			}
+		});
 		menuBar.add(mntmProjection);
 		
 		JMenu mnStats = new JMenu("Stats");
 		menuBar.add(mnStats);
 		
 		JMenuItem mntmProfitableShows = new JMenuItem("Profitable shows");
+		mntmProfitableShows.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				ProfitableShows ps = new ProfitableShows();
+				ps.setVisible(true);
+			}
+		});
 		mnStats.add(mntmProfitableShows);
 		
 		JMenuItem mntmPrimeTime = new JMenuItem("Prime Time");
+		mntmPrimeTime.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				PrimeTime pt = new PrimeTime();
+				pt.setVisible(true);
+			}
+		});
 		mnStats.add(mntmPrimeTime);
 		
 		JMenuItem mntmPrimeTimeRooms = new JMenuItem("Prime Time Rooms");
+		mntmPrimeTimeRooms.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				dispose();
+				PrimeTimeRooms ptr = new PrimeTimeRooms();
+				ptr.setVisible(true);
+			}
+		});
 		mnStats.add(mntmPrimeTimeRooms);
 		getContentPane().setSize(getWidth(),getHeight());
 		

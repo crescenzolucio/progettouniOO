@@ -64,6 +64,11 @@ public class InsertFilmJframe extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
+	    setSize(729, 420);
+		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
+		setTitle("Insert Film");
+		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+		setResizable(false);
 		
 		textFieldtitle = new JTextField();
 		textFieldtitle.setBounds(243, 67, 292, 20);
@@ -179,11 +184,6 @@ public class InsertFilmJframe extends JFrame {
 		btnInsert.setBounds(187, 314, 89, 23);
 		contentPane.add(btnInsert);
 
-	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	    setSize(729, 420);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
-		setTitle("Insert Film");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-		setResizable(false);
+
 	}
 }

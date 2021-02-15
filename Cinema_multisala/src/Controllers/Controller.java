@@ -2,27 +2,37 @@ package Controllers;
 
 import java.util.List;
 
+import javax.swing.table.TableModel;
+
 import DAO.ActorPostgreDAO;
+import DAO.AudioPostgreDAO;
 import DAO.DirectorPostgreDAO;
 import DAO.FilmPostgreDAO;
 import DAO.ProjectionPostgreDAO;
 import DAO.RoomPostgreDAO;
+import DAO.TechnologyPostgreDAO;
 import DAO.TicketPostgreDAO;
 import DAO.UserPostgreDAO;
+import DAO.ViewPostgreDAO;
 import Entity.Actor;
+import Entity.Audio;
 import Entity.Director;
 import Entity.Film;
 import Entity.Projection;
 import Entity.Room;
+import Entity.Technology;
 import Entity.Ticket;
 import Entity.User;
 import Interfaces.ActorDAO;
+import Interfaces.AudioDAO;
 import Interfaces.DirectorDAO;
 import Interfaces.FilmDAO;
 import Interfaces.ProjectionDAO;
 import Interfaces.RoomDAO;
+import Interfaces.TechnologyDAO;
 import Interfaces.TicketDAO;
 import Interfaces.UserDAO;
+import Interfaces.ViewDAO;
 
 public class Controller {
 	public boolean searchUser(String user) {
@@ -84,5 +94,29 @@ public class Controller {
 	public Director findDirector(Integer iddirector) {
 		DirectorDAO directorDAO = new DirectorPostgreDAO();
 		return directorDAO.findDirector(iddirector);
+	}
+	public List<Audio> getAudios() {
+		AudioDAO audioDAO = new AudioPostgreDAO();
+		return audioDAO.getAudios();
+	}
+	public List<Technology> getTechnologies() {
+		TechnologyDAO techDAO = new TechnologyPostgreDAO();
+		return techDAO.getTechnologies();
+	}
+	public boolean insertRoom(Room room) {
+		RoomDAO roomDAO = new RoomPostgreDAO();
+		return roomDAO.insertRoom(room);
+	}
+	public TableModel ProfitableShowsView() {
+		ViewDAO views = new ViewPostgreDAO();
+		return views.ProfitableShowsView();
+	}
+	public TableModel PrimeTimeView() {
+		ViewDAO views = new ViewPostgreDAO();
+		return views.PrimeTimeView();
+	}
+	public TableModel PrimeTimeRoomsView() {
+		ViewDAO views = new ViewPostgreDAO();
+		return views.PrimeTimeRoomsView();
 	}
 }

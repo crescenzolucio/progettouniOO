@@ -35,7 +35,6 @@ import java.awt.event.ActionListener;
 
 public class FilmsJframe extends JFrame {
 
-	private JPanel contentPane;
 	private JTextField textFieldFilter;
 
 	/**

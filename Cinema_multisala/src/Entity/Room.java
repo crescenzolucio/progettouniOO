@@ -1,10 +1,17 @@
 package Entity;
 
 public class Room {
+	private Integer idsala;
 	private String descrizione;
 	private Integer posti;
 	private Integer techaudio;
 	private Integer techproj;
+	public Integer getIdsala() {
+		return idsala;
+	}
+	public void setIdsala(Integer idsala) {
+		this.idsala = idsala;
+	}
 	public String getDescrizione() {
 		return descrizione;
 	}
@@ -29,7 +36,7 @@ public class Room {
 	public void setTechproj(Integer techproj) {
 		this.techproj = techproj;
 	}
-	public Room(String descrizione, Integer posti, Integer techaudio, Integer techproj) {
+	public Room(Integer idsala,String descrizione, Integer posti, Integer techaudio, Integer techproj) {
 		super();
 		this.descrizione = descrizione;
 		this.posti = posti;
