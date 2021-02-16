@@ -45,6 +45,7 @@ public class Projection {
 	public void setIdsala(Integer idsala) {
 		this.idsala = idsala;
 	}
+	public Projection() {}
 	public Projection(Integer idpj, Timestamp startpj, Timestamp endpj, Integer price, Integer idfilm, Integer idsala) {
 		super();
 		this.idpj = idpj;

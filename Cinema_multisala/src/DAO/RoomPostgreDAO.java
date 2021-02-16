@@ -4,6 +4,7 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
+import java.util.LinkedList;
 
 import Entity.Film;
 import Entity.Room;
@@ -53,5 +54,30 @@ public class RoomPostgreDAO implements RoomDAO{
         	return false;
         }
 		return true;
+	}
+	
+	public LinkedList<Room> getRooms() {
+		String Query = "Select * from sale s order by s.descrizione";
+		Connectiondb connection_db =new Connectiondb();
+        Connection con=connection_db.get_connection();
+        LinkedList<Room> list = new LinkedList<Room>();
+        try {
+            PreparedStatement ps = con.prepareStatement(Query);
+            ResultSet rs =  ps.executeQuery();
+
+            while (rs.next()) {
+            	  Room room =  new Room();
+            	  room.setIdsala(rs.getInt("id_sala"));
+            	  room.setDescrizione(rs.getString("descrizione"));
+            	  room.setTechaudio(rs.getInt("sistema_audio"));
+            	  room.setTechproj(rs.getInt("tecnologia_proiezione"));
+            	  room.setPosti(rs.getInt("posti"));
+            	  list.add(room);
+            	}
+            con.close();
+        } catch(SQLException ex) {
+        	ex.printStackTrace();
+        }
+		return list;
 	}
 }

@@ -36,7 +36,7 @@ public class FilmPostgreDAO implements FilmDAO{
 	}
 	
 	public LinkedList<Film> getFilms() {
-		String Query = "Select f.*,r.nominativo from film f join registi r on r.id_regista = f.id_regista";
+		String Query = "Select f.*,r.nominativo from film f join registi r on r.id_regista = f.id_regista order by f.titolo";
 		Connectiondb connection_db =new Connectiondb();
         Connection con=connection_db.get_connection();
         LinkedList<Film> list = new LinkedList<Film>();

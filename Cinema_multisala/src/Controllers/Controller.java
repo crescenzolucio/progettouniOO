@@ -103,6 +103,10 @@ public class Controller {
 		TechnologyDAO techDAO = new TechnologyPostgreDAO();
 		return techDAO.getTechnologies();
 	}
+	public List<Room> getRooms() {
+		RoomDAO roomDAO = new RoomPostgreDAO();
+		return roomDAO.getRooms();
+	}
 	public boolean insertRoom(Room room) {
 		RoomDAO roomDAO = new RoomPostgreDAO();
 		return roomDAO.insertRoom(room);
@@ -118,5 +122,9 @@ public class Controller {
 	public TableModel PrimeTimeRoomsView() {
 		ViewDAO views = new ViewPostgreDAO();
 		return views.PrimeTimeRoomsView();
+	}
+	public boolean insertProjection(Projection projection) {
+		ProjectionDAO pjDAO = new ProjectionPostgreDAO();
+		return pjDAO.insertProjection(projection);
 	}
 }

@@ -24,5 +24,9 @@
 	<classpathentry kind="lib" path="C:/Users/cresc/.p2/pool/plugins/com.ibm.icu_67.1.0.v20200706-1749.jar" sourcepath="C:/Users/cresc/.p2/pool/plugins/com.ibm.icu_67.1.0.v20200706-1749.jar"/>
 	<classpathentry kind="lib" path="C:/Users/cresc/.p2/pool/plugins/org.eclipse.ui.forms_3.10.0.v20200727-0948.jar" sourcepath="C:/Users/cresc/.p2/pool/plugins/org.eclipse.ui.forms_3.10.0.v20200727-0948.jar"/>
 	<classpathentry kind="lib" path="jgoodies-forms-1.8.0.jar" sourcepath="jgoodies-forms-1.8.0-sources.jar"/>
+	<classpathentry kind="lib" path="C:/Users/cresc/Documents/GitHub/progettouniOO/Jar/jcalendar-1.4.jar"/>
+	<classpathentry kind="lib" path="C:/Users/cresc/Documents/GitHub/progettouniOO/Jar/jgoodies-common-1.2.0.jar"/>
+	<classpathentry kind="lib" path="C:/Users/cresc/Documents/GitHub/progettouniOO/Jar/jgoodies-looks-2.4.1.jar"/>
+	<classpathentry kind="lib" path="C:/Users/cresc/Documents/GitHub/progettouniOO/Jar/junit-4.6.jar"/>
 	<classpathentry kind="output" path="bin"/>
 </classpath>

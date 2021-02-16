@@ -1,6 +1,8 @@
 package GUI;
 
-import java.awt.BorderLayout;
+import static org.junit.Assert.assertNotNull;
+
+import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 
@@ -8,19 +10,39 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
+import com.toedter.calendar.JDateChooser;
+
 import Controllers.Controller;
+import Entity.Audio;
+import Entity.Film;
+import Entity.Projection;
+import Entity.Room;
+import Entity.Technology;
+
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
+import javax.swing.JOptionPane;
 import javax.swing.JTextField;
+import javax.swing.SpinnerNumberModel;
+
 import java.awt.event.ActionListener;
+import java.awt.event.KeyAdapter;
+import java.awt.event.KeyEvent;
+import java.sql.Timestamp;
+import java.text.DateFormat;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
+import java.util.Calendar;
+import java.util.Date;
 import java.awt.event.ActionEvent;
+import com.toedter.calendar.JYearChooserBeanInfo;
+import com.toedter.components.JLocaleChooser;
+import javax.swing.JSpinner;
 
 public class ProjectionJframe extends JFrame {
 
 	private JPanel contentPane;
-	private JTextField textFieldStart;
-	private JTextField textFieldEnd;
 	private JTextField textFieldPrice;
 
 	/**
@@ -50,11 +72,7 @@ public class ProjectionJframe extends JFrame {
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
-		
-		JButton btnInsert = new JButton("Insert");
-		btnInsert.setBounds(208, 189, 89, 23);
-		contentPane.add(btnInsert);
-		
+
 		JButton btnUndo = new JButton("Undo");
 		btnUndo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
@@ -70,49 +88,134 @@ public class ProjectionJframe extends JFrame {
 		lblPrice.setBounds(368, 113, 77, 14);
 		contentPane.add(lblPrice);
 		
-		JComboBox comboBoxFilm = new JComboBox(new Object[]{});
+		JComboBox comboBoxFilm = new JComboBox(controller.getFilms().toArray());
 		comboBoxFilm.setEditable(false);
-		comboBoxFilm.setBounds(158, 105, 134, 22);
+		comboBoxFilm.setBounds(123, 105, 219, 22);
 		contentPane.add(comboBoxFilm);
 		
 		JLabel lblFilm = new JLabel("Film");
-		lblFilm.setBounds(102, 109, 77, 14);
+		lblFilm.setBounds(67, 109, 77, 14);
 		contentPane.add(lblFilm);
 		
 		JLabel lblStart = new JLabel("Start");
-		lblStart.setBounds(102, 64, 46, 14);
+		lblStart.setBounds(67, 64, 46, 14);
 		contentPane.add(lblStart);
-		
-		textFieldStart = new JTextField();
-		textFieldStart.setColumns(10);
-		textFieldStart.setBounds(158, 61, 134, 20);
-		contentPane.add(textFieldStart);
-		
+	
 		JLabel lblEnd = new JLabel("End");
 		lblEnd.setBounds(368, 66, 89, 14);
 		contentPane.add(lblEnd);
 		
-		textFieldEnd = new JTextField();
-		textFieldEnd.setBounds(442, 63, 134, 20);
-		contentPane.add(textFieldEnd);
-		
 		textFieldPrice = new JTextField();
-		textFieldPrice.setBounds(442, 110, 64, 20);
+		textFieldPrice.setBounds(418, 110, 64, 20);
 		contentPane.add(textFieldPrice);
 		
+		JLabel lblInvalidPrice = new JLabel("");
+		lblInvalidPrice.setBounds(418, 138, 134, 14);
+		lblInvalidPrice.setForeground(Color.RED);
+		contentPane.add(lblInvalidPrice);
+		
+		textFieldPrice.addKeyListener(new KeyAdapter() {
+			@Override
+			public void keyReleased(KeyEvent e) {
+				try {
+					Integer.parseInt(textFieldPrice.getText());
+					lblInvalidPrice.setText("");
+				}catch (Exception e1) {
+					lblInvalidPrice.setText("Invalid number!");
+				}
+			}
+		});
+		
 		JLabel lblRoom = new JLabel("Room");
-		lblRoom.setBounds(102, 148, 77, 14);
+		lblRoom.setBounds(67, 148, 77, 14);
 		contentPane.add(lblRoom);
 		
-		JComboBox comboBoxRoom = new JComboBox(new Object[]{});
+		JComboBox comboBoxRoom = new JComboBox(controller.getRooms().toArray());
 		comboBoxRoom.setEditable(false);
-		comboBoxRoom.setBounds(158, 144, 134, 22);
+		comboBoxRoom.setBounds(123, 144, 219, 22);
 		contentPane.add(comboBoxRoom);
-	    setSize(732, 307);
+		
+		JDateChooser dateChooserStart = new JDateChooser();
+		dateChooserStart.setBounds(123, 64, 100, 20);
+		dateChooserStart.getDateEditor().setEnabled(false);
+		contentPane.add(dateChooserStart);
+
+		JSpinner spinnerStartHour = new JSpinner();
+		spinnerStartHour.setBounds(241, 64, 44, 20);
+		spinnerStartHour.setModel(new SpinnerNumberModel(0,0,23,1));
+		contentPane.add(spinnerStartHour);
+		
+		JSpinner spinnerStartMinutes = new JSpinner();
+		spinnerStartMinutes.setBounds(298, 64, 44, 20);
+		spinnerStartMinutes.setModel(new SpinnerNumberModel(0,0,59,1));
+		contentPane.add(spinnerStartMinutes);
+		
+		JDateChooser dateChooserEnd = new JDateChooser();
+		dateChooserEnd.setBounds(418, 64, 100, 20);
+		dateChooserEnd.getDateEditor().setEnabled(false);
+		contentPane.add(dateChooserEnd);
+		
+		JSpinner spinnerEndHour = new JSpinner();
+		spinnerEndHour.setBounds(535, 64, 44, 20);
+		spinnerEndHour.setModel(new SpinnerNumberModel(0,0,23,1));
+		contentPane.add(spinnerEndHour);
+		
+		JSpinner spinnerEndMinutes = new JSpinner();
+		spinnerEndMinutes.setBounds(592, 64, 44, 20);
+		spinnerEndMinutes.setModel(new SpinnerNumberModel(0,0,59,1));
+		contentPane.add(spinnerEndMinutes);
+		
+		JButton btnInsert = new JButton("Insert");
+		btnInsert.addActionListener(new ActionListener() {
+			public void actionPerformed(ActionEvent e) {
+				if(!textFieldPrice.getText().equals("") && !dateChooserStart.getDateEditor().getDate().toString().equals("") 
+						&& !dateChooserEnd.getDateEditor().getDate().toString().equals("") && lblInvalidPrice.getText().equals("") ) {
+				    Calendar calendar = Calendar.getInstance();
+
+					long time;
+					Object itemRoom = comboBoxRoom.getSelectedItem();
+					Integer idroom = ((Room)itemRoom).getIdsala();
+					
+					Object itemFilm = comboBoxFilm.getSelectedItem();
+					Integer idfilm = ((Film)itemFilm).getId_film();
+					
+					calendar.setTime(dateChooserStart.getDateEditor().getDate());
+				    calendar.add(Calendar.HOUR_OF_DAY, Integer.parseInt(spinnerStartHour.getValue().toString()));;
+				    calendar.add(Calendar.MINUTE, Integer.parseInt(spinnerStartMinutes.getValue().toString()));;
+					time = calendar.getTimeInMillis();
+					
+					Timestamp timestart = new Timestamp(time);
+					
+					calendar.setTime(dateChooserEnd.getDateEditor().getDate());
+				    calendar.add(Calendar.HOUR_OF_DAY, Integer.parseInt(spinnerEndHour.getValue().toString()));;
+				    calendar.add(Calendar.MINUTE, Integer.parseInt(spinnerEndMinutes.getValue().toString()));;
+					time = calendar.getTimeInMillis();
+					
+					Timestamp timeend = new Timestamp(time);
+					
+					Integer price = Integer.parseInt(textFieldPrice.getText());
+					
+					Projection pj = new Projection();
+					pj.setIdfilm(idfilm); pj.setIdsala(idroom); pj.setStartpj(timestart); 
+					pj.setEndpj(timeend); pj.setPrice(price);
+					System.out.println(timestart);
+					System.out.println(timeend);
+//					if(controller.insertProjection(pj)){
+//						JOptionPane.showMessageDialog(null, "Projection created!");
+//						comboBoxRoom.setSelectedIndex(0); comboBoxFilm.setSelectedIndex(0);	textFieldPrice.setText("");
+//						dateChooserEnd.setDate(new Date()); spinnerStartHour.setValue(0); spinnerEndHour.setValue(0);
+//						spinnerStartMinutes.setValue(0); spinnerEndMinutes.setValue(0); dateChooserStart.setDate(new Date()); 
+//					}
+				}else JOptionPane.showMessageDialog(null, "Enter all parameters correctly!");
+			}
+		});
+		btnInsert.setBounds(173, 189, 89, 23);
+		contentPane.add(btnInsert);
+		
+		setSize(732, 307);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
 		setTitle("Projection add");
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 	}
-
 }

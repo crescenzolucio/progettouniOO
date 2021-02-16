@@ -44,4 +44,8 @@ public class Room {
 		this.techproj = techproj;
 	}
 	public Room() {}
+	@Override
+	public String toString() {
+		return descrizione;
+	}
 }

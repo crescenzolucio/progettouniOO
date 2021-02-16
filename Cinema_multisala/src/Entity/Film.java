@@ -61,6 +61,11 @@ public class Film {
 		this.url_poster = url_poster;
 	}
 	public Film() {}
+	@Override
+	public String toString() {
+		return titolo;
+	}
+	
 	
 	
 }

@@ -6,6 +6,8 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.util.LinkedList;
+
+import Entity.Film;
 import Entity.Projection;
 import Interfaces.ProjectionDAO;
 
@@ -55,5 +57,26 @@ public class ProjectionPostgreDAO implements ProjectionDAO{
         } catch(SQLException ex) {
         }
 		return count;
+	}
+	
+	public boolean insertProjection(Projection projection) {
+		String Query = "INSERT INTO proiezioni(id_sala, id_film, prezzo, inizio_proiezione,fine_proiezione) VALUES (?, ?, ?, ?, ?);";
+		Connectiondb connection_db =new Connectiondb();
+        Connection con=connection_db.get_connection();
+        try {
+            PreparedStatement ps = con.prepareStatement(Query);
+            ps.setInt(1, projection.getIdsala());
+            ps.setInt(2, projection.getIdfilm());
+            ps.setInt(3, projection.getPrice());
+            ps.setTimestamp(4, projection.getStartpj());
+            ps.setTimestamp(5, projection.getEndpj());
+            ps.execute();
+            ps.close();
+            con.close();
+        } catch(SQLException ex) {
+        	ex.printStackTrace();
+        	return false;
+        }
+		return true;
 	}
 }
