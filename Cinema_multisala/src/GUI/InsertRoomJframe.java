@@ -24,8 +24,10 @@ import javax.swing.JComboBox;
 import java.awt.Color;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 
-public class RoomJframe extends JFrame {
+public class InsertRoomJframe extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldDescription;
@@ -38,7 +40,7 @@ public class RoomJframe extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					RoomJframe frame = new RoomJframe();
+					InsertRoomJframe frame = new InsertRoomJframe();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -50,7 +52,7 @@ public class RoomJframe extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public RoomJframe() {
+	public InsertRoomJframe() {
 		Controller controller =  new Controller();
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
@@ -61,15 +63,25 @@ public class RoomJframe extends JFrame {
 	    setSize(732, 307);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
 		setTitle("Rooms add");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
+		
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				RoomsJframe roomsjf = new RoomsJframe();
+				roomsjf.setVisible(true);
+				dispose();
+			}
+		});
+
 		
 		JButton btnUndo = new JButton("Undo");
 		btnUndo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				ProjectionsJframe projJf = new ProjectionsJframe();
-				projJf.setVisible(true);
+				RoomsJframe roomsjf = new RoomsJframe();
+				roomsjf.setVisible(true);
 			}
 		});
 		btnUndo.setBounds(431, 181, 89, 23);

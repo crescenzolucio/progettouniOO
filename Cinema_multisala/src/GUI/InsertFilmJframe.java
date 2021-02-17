@@ -17,6 +17,8 @@ import javax.swing.JOptionPane;
 import javax.swing.JButton;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.awt.Color;
 import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
@@ -49,6 +51,7 @@ public class InsertFilmJframe extends JFrame {
 	 */
 	public InsertFilmJframe() {
 		Controller controller =  new Controller();
+		
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -58,9 +61,18 @@ public class InsertFilmJframe extends JFrame {
 	    setSize(729, 420);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
 		setTitle("Insert Film");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 		
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				FilmsJframe filmsjf = new FilmsJframe();
+				filmsjf.setVisible(true);
+				dispose();
+			}
+		});
+
 		textFieldtitle = new JTextField();
 		textFieldtitle.setBounds(243, 67, 292, 20);
 		contentPane.add(textFieldtitle);

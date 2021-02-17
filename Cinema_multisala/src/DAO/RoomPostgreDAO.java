@@ -57,7 +57,8 @@ public class RoomPostgreDAO implements RoomDAO{
 	}
 	
 	public LinkedList<Room> getRooms() {
-		String Query = "Select * from sale s order by s.descrizione";
+		String Query = "Select s.id_sala,s.descrizione,s.sistema_audio,(select t.audio from sistemi_audio t where t.id_sound=s.sistema_audio),"
+				+ "s.tecnologia_proiezione,(select t.tecnologia from tecnologie_proiezione t where t.id_tec=s.tecnologia_proiezione),s.posti from sale s order by s.descrizione";
 		Connectiondb connection_db =new Connectiondb();
         Connection con=connection_db.get_connection();
         LinkedList<Room> list = new LinkedList<Room>();
@@ -69,8 +70,10 @@ public class RoomPostgreDAO implements RoomDAO{
             	  Room room =  new Room();
             	  room.setIdsala(rs.getInt("id_sala"));
             	  room.setDescrizione(rs.getString("descrizione"));
+            	  room.setTechprojdesc(rs.getString("tecnologia"));
             	  room.setTechaudio(rs.getInt("sistema_audio"));
             	  room.setTechproj(rs.getInt("tecnologia_proiezione"));
+            	  room.setTechaudiodesc(rs.getString("audio"));
             	  room.setPosti(rs.getInt("posti"));
             	  list.add(room);
             	}
@@ -79,5 +82,19 @@ public class RoomPostgreDAO implements RoomDAO{
         	ex.printStackTrace();
         }
 		return list;
+	}
+	
+	public Integer deleteRoom(Integer idroom) {
+		String Query = "DELETE FROM SALE F WHERE F.ID_SALA=?";
+		Connectiondb connection_db =new Connectiondb();
+        Connection con=connection_db.get_connection();
+        try {
+            PreparedStatement ps = con.prepareStatement(Query);
+            ps.setInt(1, idroom);
+            return ps.executeUpdate();
+        } catch(SQLException ex) {
+        	ex.printStackTrace();
+        	return -1;
+        }
 	}
 }

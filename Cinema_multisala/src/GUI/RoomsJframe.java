@@ -24,6 +24,7 @@ import javax.swing.table.TableRowSorter;
 import Controllers.Controller;
 import Entity.Director;
 import Entity.Film;
+import Entity.Room;
 import ImportedClass.ButtonColumn;
 
 import javax.swing.JScrollPane;
@@ -35,7 +36,7 @@ import javax.swing.JLabel;
 import javax.swing.JButton;
 import java.awt.event.ActionListener;
 
-public class FilmsJframe extends JFrame {
+public class RoomsJframe extends JFrame {
 
 	private JTextField textFieldFilter;
 
@@ -46,7 +47,7 @@ public class FilmsJframe extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					FilmsJframe frame = new FilmsJframe();
+					RoomsJframe frame = new RoomsJframe();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -58,39 +59,39 @@ public class FilmsJframe extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public FilmsJframe() {
-		Controller contruser = new Controller();
+	public RoomsJframe() {
+		Controller controller = new Controller();
 	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    
 	    setSize(screenSize.width/2, screenSize.height/2);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
-		setTitle("Films");
+		setTitle("Rooms");
 		setResizable(false);
 		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				ProjectionsJframe pjframe =  new ProjectionsJframe();
-				pjframe.setVisible(true);
+				ProjectionsJframe projectionsjf = new ProjectionsJframe();
+				projectionsjf.setVisible(true);
 				dispose();
 			}
 		});
 		
 		DefaultTableModel model = new DefaultTableModel();
 
-		String[] columnNames = {"Title","Year","Producer","Min.","Delete",""};
+		String[] columnNames = {"Description","Audio","Video tech.","Seats.","Delete",""};
 		model.setColumnIdentifiers(columnNames);
 		
-		LinkedList<Film> list= (LinkedList<Film>) contruser.getFilms();
-		for (Film film : list) {
+		LinkedList<Room> list= (LinkedList<Room>) controller.getRooms();
+		for (Room room : list) {
 			  Object[] obj = new Object[6];
-			  obj[0] = film.getTitolo();
-			  obj[1] = film.getAnno_produzione();
-			  obj[2] = film.getRegistaname();
-			  obj[3] = film.getDurata_minuti();
+			  obj[0] = room.getDescrizione();
+			  obj[1] = room.getTechaudiodesc();
+			  obj[2] = room.getTechprojdesc();
+			  obj[3] = room.getPosti();
 			  obj[4] = "DELETE";
-			  obj[5] = film.getId_film();
+			  obj[5] = room.getIdsala();
 			  model.addRow(obj);
 			}
 		
@@ -114,8 +115,8 @@ public class FilmsJframe extends JFrame {
         //Width Columns
         table.getColumnModel().getColumn(0).setMinWidth(200);
         table.getColumnModel().getColumn(0).setMaxWidth(200);
-        table.getColumnModel().getColumn(1).setMinWidth(50);
-        table.getColumnModel().getColumn(1).setMaxWidth(50);
+        table.getColumnModel().getColumn(1).setMinWidth(200);
+        table.getColumnModel().getColumn(1).setMaxWidth(200);
         table.getColumnModel().getColumn(2).setMinWidth(200);
         table.getColumnModel().getColumn(2).setMaxWidth(200);
         table.getColumnModel().getColumn(3).setMinWidth(50);
@@ -132,12 +133,12 @@ public class FilmsJframe extends JFrame {
 			private static final long serialVersionUID = 1L;
 			//Delete film
 			public void actionPerformed(ActionEvent e){
-				String text = "Do you want to delete the film?";
-				if(JOptionPane.showConfirmDialog(null, text, "Delete film", 0, 1, null) == 0) {
-					Integer idfilm =  Integer.parseInt(table.getValueAt(table.getSelectedRow(),5).toString());
+				String text = "Do you want to delete the room?";
+				if(JOptionPane.showConfirmDialog(null, text, "Delete room", 0, 1, null) == 0) {
+					Integer idroom =  Integer.parseInt(table.getValueAt(table.getSelectedRow(),5).toString());
 					sorter.setRowFilter(null);
 					model.removeRow(table.getSelectedRow());
-					if(contruser.deleteFilm(idfilm) > 0) {
+					if(controller.deleteRoom(idroom) > 0) {
 						JOptionPane.showMessageDialog(null , "Deleted successfully");
 						textFieldFilter.setText("");
 					}else {
@@ -164,15 +165,15 @@ public class FilmsJframe extends JFrame {
 		getContentPane().add(textFieldFilter);
 		textFieldFilter.setColumns(10);
 		
-		JButton btnNewFilm = new JButton("New film");
+		JButton btnNewFilm = new JButton("New room");
 		btnNewFilm.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				InsertFilmJframe insertfilmjf = new InsertFilmJframe();
-				insertfilmjf.setVisible(true);
+				InsertRoomJframe insertroomjf = new InsertRoomJframe();
+				insertroomjf.setVisible(true);
 				dispose();
 			}
 		});
-		btnNewFilm.setBounds(388, -1, 89, 23);
+		btnNewFilm.setBounds(388, -1, 101, 23);
 		getContentPane().add(btnNewFilm);
 		
 		JButton btnUndo = new JButton("Undo");
@@ -183,24 +184,13 @@ public class FilmsJframe extends JFrame {
 				dispose();
 			}
 		});
-		btnUndo.setBounds(667, -1, 89, 23);
+		btnUndo.setBounds(499, -1, 89, 23);
 		getContentPane().add(btnUndo);
 		
 		//Filter
 		JLabel lblFilter = new JLabel("Filter");
 		lblFilter.setBounds(10, 3, 46, 14);
 		getContentPane().add(lblFilter);
-		
-		JButton btnUndo_1 = new JButton("New Actor/Producer");
-		btnUndo_1.addActionListener(new ActionListener() {
-			public void actionPerformed(ActionEvent e) {
-				InsertActorProducerJframe insertactorproducerjf = new InsertActorProducerJframe();
-				insertactorproducerjf.setVisible(true);
-				dispose();
-			}
-		});
-		btnUndo_1.setBounds(487, -1, 170, 23);
-		getContentPane().add(btnUndo_1);
 		textFieldFilter.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void insertUpdate(DocumentEvent e) {

@@ -81,7 +81,7 @@ public class ProjectionsJframe extends JFrame {
 		JMenuItem mntmRooms = new JMenuItem("Rooms");
 		mntmRooms.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				RoomJframe roomjf = new RoomJframe();
+				RoomsJframe roomjf = new RoomsJframe();
 				roomjf.setVisible(true);
 				dispose();
 			}
@@ -91,7 +91,7 @@ public class ProjectionsJframe extends JFrame {
 		JMenuItem mntmProjection = new JMenuItem("Projections");
 		mntmProjection.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProjectionJframe projfj = new ProjectionJframe();
+				InsertProjectionJframe projfj = new InsertProjectionJframe();
 				projfj.setVisible(true);
 				dispose();
 			}

@@ -6,6 +6,7 @@ import javax.swing.table.TableModel;
 
 import DAO.ActorPostgreDAO;
 import DAO.AudioPostgreDAO;
+import DAO.CountryPostgreDAO;
 import DAO.DirectorPostgreDAO;
 import DAO.FilmPostgreDAO;
 import DAO.ProjectionPostgreDAO;
@@ -16,6 +17,7 @@ import DAO.UserPostgreDAO;
 import DAO.ViewPostgreDAO;
 import Entity.Actor;
 import Entity.Audio;
+import Entity.Country;
 import Entity.Director;
 import Entity.Film;
 import Entity.Projection;
@@ -25,6 +27,7 @@ import Entity.Ticket;
 import Entity.User;
 import Interfaces.ActorDAO;
 import Interfaces.AudioDAO;
+import Interfaces.CountryDAO;
 import Interfaces.DirectorDAO;
 import Interfaces.FilmDAO;
 import Interfaces.ProjectionDAO;
@@ -126,5 +129,25 @@ public class Controller {
 	public boolean insertProjection(Projection projection) {
 		ProjectionDAO pjDAO = new ProjectionPostgreDAO();
 		return pjDAO.insertProjection(projection);
+	}
+	public Integer deleteRoom(Integer idroom){
+		RoomDAO roomDAO = new RoomPostgreDAO();
+		return roomDAO.deleteRoom(idroom);
+	}
+	public Technology getTechnology(Integer idtec){
+		TechnologyDAO tecDAO = new TechnologyPostgreDAO();
+		return tecDAO.getTechnology(idtec);
+	}
+	public List<Country> getCountries() {
+		CountryDAO countryDAO = new CountryPostgreDAO();
+		return countryDAO.getCountries();
+	}
+	public boolean insertActor(Actor actor) {
+		ActorDAO actorDAO = new ActorPostgreDAO();
+		return actorDAO.insertActor(actor);
+	}
+	public boolean insertDirector(Director director) {
+		DirectorDAO directorDAO = new DirectorPostgreDAO();
+		return directorDAO.insertDirector(director);
 	}
 }

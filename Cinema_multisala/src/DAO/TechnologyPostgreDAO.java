@@ -32,4 +32,31 @@ public class TechnologyPostgreDAO implements TechnologyDAO{
         }
 		return list;
 	}
+	
+	public Technology getTechnology(Integer idtec) {
+		String Query = "Select * from tecnologie_proiezione t where t.id_tec=?";
+		Connectiondb connection_db =new Connectiondb();
+        Connection con=connection_db.get_connection();
+    	Technology tec = new Technology();  
+        try {
+            PreparedStatement ps = con.prepareStatement(Query);
+            ps.setInt(1, idtec);
+            ResultSet rs =  ps.executeQuery();
+
+            if (!rs.next()) { 
+                System.out.println("No records found");
+            }else {
+            	Integer idtech = rs.getInt("id_tec");
+            	String  description = rs.getString("tecnologia");
+            	Integer year =   rs.getInt("anno");
+            	tec.setIdtecnology(idtech);
+            	tec.setDescription(description);
+            	tec.setYear(year);
+      		}
+            con.close();
+        } catch(SQLException ex) {
+        	ex.printStackTrace();
+        }
+		return tec;
+	}
 }

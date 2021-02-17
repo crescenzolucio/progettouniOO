@@ -8,4 +8,5 @@ public interface RoomDAO {
 	public Room getRoom(Integer idroom);
 	public boolean insertRoom(Room room);
 	public List<Room> getRooms();
+	public Integer deleteRoom(Integer idroom);
 }

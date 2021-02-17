@@ -8,9 +8,11 @@ import java.util.Date;
 import java.util.LinkedList;
 
 import Entity.Actor;
+import Entity.Film;
 import Interfaces.ActorDAO;
 
 public class ActorPostgreDAO implements ActorDAO{
+	
 		public LinkedList<Actor> findActors() {
 			String Query = "SELECT * FROM attori a order by a.nominativo asc";
 			Connectiondb connection_db =new Connectiondb();
@@ -25,7 +27,7 @@ public class ActorPostgreDAO implements ActorDAO{
 	            	  String name = rs.getString("nominativo");
 	            	  Integer country = rs.getInt("paese_di_origine");
 	            	  Date birth = rs.getDate("data_nascita");
-	            	  Actor actor = new Actor(idactor,name,country.toString(),birth);
+	            	  Actor actor = new Actor(idactor,name,country,birth);
 	            	  list.add(actor);
 	            	}
 	            con.close();
@@ -33,5 +35,24 @@ public class ActorPostgreDAO implements ActorDAO{
 	        	ex.printStackTrace();
 	        }
 			return list;
+		}
+		
+		public boolean insertActor(Actor actor) {
+			String Query = "INSERT INTO public.attori( nominativo, paese_di_origine, data_nascita) VALUES (?, ?, ?)";
+			Connectiondb connection_db =new Connectiondb();
+	        Connection con=connection_db.get_connection();
+	        try {
+	            PreparedStatement ps = con.prepareStatement(Query);
+	            ps.setString(1, actor.getName());
+	            ps.setInt(2, actor.getCountry());
+	            ps.setDate(3, new java.sql.Date(actor.getDateofbirth().getTime()));
+	            ps.execute();
+	            ps.close();
+	            con.close();
+	        } catch(SQLException ex) {
+	        	ex.printStackTrace();
+	        	return false;
+	        }
+			return true;
 		}
 }

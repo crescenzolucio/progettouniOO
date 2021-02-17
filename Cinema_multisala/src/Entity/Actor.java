@@ -5,8 +5,9 @@ import java.util.Date;
 public class Actor {
 	private Integer idactor;
 	private String name;
-	private String country;
+	private Integer idcountry;
 	private Date dateofbirth;
+	
 	public Integer getIdactor() {
 		return idactor;
 	}
@@ -19,11 +20,11 @@ public class Actor {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public String getCountry() {
-		return country;
+	public Integer getCountry() {
+		return idcountry;
 	}
-	public void setCountry(String country) {
-		this.country = country;
+	public void setCountry(Integer country) {
+		this.idcountry = country;
 	}
 	public Date getDateofbirth() {
 		return dateofbirth;
@@ -31,13 +32,16 @@ public class Actor {
 	public void setDateofbirth(Date dateofbirth) {
 		this.dateofbirth = dateofbirth;
 	}
-	public Actor(Integer idactor, String name, String country, Date dateofbirth) {
+	public Actor(Integer idactor, String name, Integer idcountry, Date dateofbirth) {
 		super();
 		this.idactor = idactor;
 		this.name = name;
-		this.country = country;
+		this.idcountry = idcountry;
 		this.dateofbirth = dateofbirth;
 	}
+	
+	public Actor() {};
+	
 	@Override
 	public String toString() {
 		return name;

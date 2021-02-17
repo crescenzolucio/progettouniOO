@@ -1,7 +1,5 @@
 package GUI;
 
-import static org.junit.Assert.assertNotNull;
-
 import java.awt.Color;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
@@ -13,12 +11,9 @@ import javax.swing.border.EmptyBorder;
 import com.toedter.calendar.JDateChooser;
 
 import Controllers.Controller;
-import Entity.Audio;
 import Entity.Film;
 import Entity.Projection;
 import Entity.Room;
-import Entity.Technology;
-
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JLabel;
@@ -29,18 +24,15 @@ import javax.swing.SpinnerNumberModel;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
+import java.awt.event.WindowAdapter;
+import java.awt.event.WindowEvent;
 import java.sql.Timestamp;
-import java.text.DateFormat;
-import java.text.ParseException;
-import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.awt.event.ActionEvent;
-import com.toedter.calendar.JYearChooserBeanInfo;
-import com.toedter.components.JLocaleChooser;
 import javax.swing.JSpinner;
 
-public class ProjectionJframe extends JFrame {
+public class InsertProjectionJframe extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldPrice;
@@ -52,7 +44,7 @@ public class ProjectionJframe extends JFrame {
 		EventQueue.invokeLater(new Runnable() {
 			public void run() {
 				try {
-					ProjectionJframe frame = new ProjectionJframe();
+					InsertProjectionJframe frame = new InsertProjectionJframe();
 					frame.setVisible(true);
 				} catch (Exception e) {
 					e.printStackTrace();
@@ -64,9 +56,19 @@ public class ProjectionJframe extends JFrame {
 	/**
 	 * Create the frame.
 	 */
-	public ProjectionJframe() {
+	public InsertProjectionJframe() {
 		Controller controller =  new Controller();
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+
+		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);
+		addWindowListener(new WindowAdapter() {
+			@Override
+			public void windowClosing(WindowEvent e) {
+				ProjectionsJframe projectionsjf = new ProjectionsJframe();
+				projectionsjf.setVisible(true);
+				dispose();
+			}
+		});
+		
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -85,7 +87,7 @@ public class ProjectionJframe extends JFrame {
 		contentPane.add(btnUndo);
 		
 		JLabel lblPrice = new JLabel("Price");
-		lblPrice.setBounds(368, 113, 77, 14);
+		lblPrice.setBounds(368, 108, 77, 14);
 		contentPane.add(lblPrice);
 		
 		JComboBox comboBoxFilm = new JComboBox(controller.getFilms().toArray());
@@ -106,7 +108,7 @@ public class ProjectionJframe extends JFrame {
 		contentPane.add(lblEnd);
 		
 		textFieldPrice = new JTextField();
-		textFieldPrice.setBounds(418, 110, 64, 20);
+		textFieldPrice.setBounds(418, 105, 64, 20);
 		contentPane.add(textFieldPrice);
 		
 		JLabel lblInvalidPrice = new JLabel("");
@@ -171,28 +173,33 @@ public class ProjectionJframe extends JFrame {
 				if(!textFieldPrice.getText().equals("") && !dateChooserStart.getDateEditor().getDate().toString().equals("") 
 						&& !dateChooserEnd.getDateEditor().getDate().toString().equals("") && lblInvalidPrice.getText().equals("") ) {
 				    Calendar calendar = Calendar.getInstance();
-
-					long time;
+					long time,seconds;
+					
+					//idroom
 					Object itemRoom = comboBoxRoom.getSelectedItem();
 					Integer idroom = ((Room)itemRoom).getIdsala();
 					
+					//idfilm
 					Object itemFilm = comboBoxFilm.getSelectedItem();
 					Integer idfilm = ((Film)itemFilm).getId_film();
 					
-					calendar.setTime(dateChooserStart.getDateEditor().getDate());
-				    calendar.add(Calendar.HOUR_OF_DAY, Integer.parseInt(spinnerStartHour.getValue().toString()));;
-				    calendar.add(Calendar.MINUTE, Integer.parseInt(spinnerStartMinutes.getValue().toString()));;
+					//end projection
+					calendar.setTime(dateChooserEnd.getDate());
+				    calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(spinnerEndHour.getValue().toString()));
+				    calendar.set(Calendar.MINUTE, Integer.parseInt(spinnerEndMinutes.getValue().toString()));
 					time = calendar.getTimeInMillis();
-					
-					Timestamp timestart = new Timestamp(time);
-					
-					calendar.setTime(dateChooserEnd.getDateEditor().getDate());
-				    calendar.add(Calendar.HOUR_OF_DAY, Integer.parseInt(spinnerEndHour.getValue().toString()));;
-				    calendar.add(Calendar.MINUTE, Integer.parseInt(spinnerEndMinutes.getValue().toString()));;
-					time = calendar.getTimeInMillis();
-					
+					seconds = time;
 					Timestamp timeend = new Timestamp(time);
 					
+					//start projection
+					calendar.setTime(dateChooserStart.getDate());
+				    calendar.set(Calendar.HOUR_OF_DAY, Integer.parseInt(spinnerStartHour.getValue().toString()));
+				    calendar.set(Calendar.MINUTE, Integer.parseInt(spinnerStartMinutes.getValue().toString()));
+					time = calendar.getTimeInMillis();
+					seconds = (seconds - time)/1000; 
+					Timestamp timestart = new Timestamp(time);
+					
+					//price
 					Integer price = Integer.parseInt(textFieldPrice.getText());
 					
 					Projection pj = new Projection();
@@ -200,12 +207,20 @@ public class ProjectionJframe extends JFrame {
 					pj.setEndpj(timeend); pj.setPrice(price);
 					System.out.println(timestart);
 					System.out.println(timeend);
-//					if(controller.insertProjection(pj)){
-//						JOptionPane.showMessageDialog(null, "Projection created!");
-//						comboBoxRoom.setSelectedIndex(0); comboBoxFilm.setSelectedIndex(0);	textFieldPrice.setText("");
-//						dateChooserEnd.setDate(new Date()); spinnerStartHour.setValue(0); spinnerEndHour.setValue(0);
-//						spinnerStartMinutes.setValue(0); spinnerEndMinutes.setValue(0); dateChooserStart.setDate(new Date()); 
-//					}
+					
+					//diff hours between calendars end-start
+					int hours = (int) (seconds / 3600);
+					System.out.println(hours);
+					if(price >=0){
+						if(hours <= 24 && hours >= 0){
+							if(controller.insertProjection(pj)){
+								JOptionPane.showMessageDialog(null, "Projection created!");
+								comboBoxRoom.setSelectedIndex(0); comboBoxFilm.setSelectedIndex(0);	textFieldPrice.setText("");
+								dateChooserEnd.setDate(new Date()); spinnerStartHour.setValue(0); spinnerEndHour.setValue(0);
+								spinnerStartMinutes.setValue(0); spinnerEndMinutes.setValue(0); dateChooserStart.setDate(new Date()); 
+							}
+						}else JOptionPane.showMessageDialog(null, "The projection hours must be between 0 and 24!");
+					}else JOptionPane.showMessageDialog(null, "The price cannot be negative!");
 				}else JOptionPane.showMessageDialog(null, "Enter all parameters correctly!");
 			}
 		});
@@ -215,7 +230,6 @@ public class ProjectionJframe extends JFrame {
 		setSize(732, 307);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
 		setTitle("Projection add");
-		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setResizable(false);
 	}
 }

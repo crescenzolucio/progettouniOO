@@ -25,7 +25,7 @@ public class DirectorPostgreDAO implements DirectorDAO{
           	  String name = rs.getString("nominativo");
           	  Integer country = rs.getInt("paese_di_origine");
           	  Date birth = rs.getDate("data_nascita");
-          	  Director director = new Director(idactor,name,country.toString(),birth);
+          	  Director director = new Director(idactor,name,country,birth);
           	  list.add(director);
             }
             con.close();
@@ -47,7 +47,7 @@ public class DirectorPostgreDAO implements DirectorDAO{
             if (!rs.next()) { 
             	  director.setName(rs.getString("nominativo"));
             	  director.setId_director(rs.getInt("id_regista"));
-            	  director.setCountry(rs.getString("paese"));
+            	  director.setCountry(rs.getInt("paese"));
             	  director.setDateofbirth(rs.getDate("data_nascita"));
             	}
             con.close();
@@ -57,4 +57,22 @@ public class DirectorPostgreDAO implements DirectorDAO{
 		return director;
 	}
 	
+	public boolean insertDirector(Director director) {
+		String Query = "INSERT INTO public.registi( nominativo, paese_di_origine, data_nascita) VALUES (?, ?, ?)";
+		Connectiondb connection_db =new Connectiondb();
+        Connection con=connection_db.get_connection();
+        try {
+            PreparedStatement ps = con.prepareStatement(Query);
+            ps.setString(1, director.getName());
+            ps.setInt(2, director.getCountry());
+            ps.setDate(3, new java.sql.Date(director.getDateofbirth().getTime()));
+            ps.execute();
+            ps.close();
+            con.close();
+        } catch(SQLException ex) {
+        	ex.printStackTrace();
+        	return false;
+        }
+		return true;
+	}
 }

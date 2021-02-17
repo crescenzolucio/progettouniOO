@@ -5,7 +5,7 @@ import java.util.Date;
 public class Director {
 	private Integer id_director;
 	private String Name;
-	private String Country;
+	private Integer Country;
 	private Date Dateofbirth;
 	public Integer getId_director() {
 		return id_director;
@@ -19,10 +19,10 @@ public class Director {
 	public void setName(String name) {
 		Name = name;
 	}
-	public String getCountry() {
+	public Integer getCountry() {
 		return Country;
 	}
-	public void setCountry(String country) {
+	public void setCountry(Integer country) {
 		Country = country;
 	}
 	public Date getDateofbirth() {
@@ -31,7 +31,7 @@ public class Director {
 	public void setDateofbirth(Date dateofbirth) {
 		Dateofbirth = dateofbirth;
 	}
-	public Director(Integer id_director, String name, String country, Date dateofbirth) {
+	public Director(Integer id_director, String name, Integer country, Date dateofbirth) {
 		super();
 		this.id_director = id_director;
 		Name = name;
