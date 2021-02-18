@@ -71,7 +71,7 @@ public class FilmsJframe extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				ProjectionsJframe pjframe =  new ProjectionsJframe();
+				TodayProjectionsJframe pjframe =  new TodayProjectionsJframe();
 				pjframe.setVisible(true);
 				dispose();
 			}
@@ -178,7 +178,7 @@ public class FilmsJframe extends JFrame {
 		JButton btnUndo = new JButton("Undo");
 		btnUndo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProjectionsJframe pjframe =  new ProjectionsJframe();
+				TodayProjectionsJframe pjframe =  new TodayProjectionsJframe();
 				pjframe.setVisible(true);
 				dispose();
 			}

@@ -8,7 +8,22 @@ public class Projection {
 	private Timestamp endpj;
 	private Integer price;
 	private Integer idfilm;
+	private String filmdescription;
 	private Integer idsala;
+	private String roomdescription;
+	
+	public String getFilmdescription() {
+		return filmdescription;
+	}
+	public void setFilmdescription(String filmdescription) {
+		this.filmdescription = filmdescription;
+	}
+	public String getRoomdescription() {
+		return roomdescription;
+	}
+	public void setRoomdescription(String roomdescription) {
+		this.roomdescription = roomdescription;
+	}
 	public Integer getIdpj() {
 		return idpj;
 	}

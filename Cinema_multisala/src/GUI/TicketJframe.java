@@ -56,7 +56,7 @@ public class TicketJframe extends JFrame {
 		//UNDO
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProjectionsJframe frame = new ProjectionsJframe();
+				TodayProjectionsJframe frame = new TodayProjectionsJframe();
 				frame.setVisible(true);
 				dispose(); 
 			}

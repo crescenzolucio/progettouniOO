@@ -43,7 +43,7 @@ public class PrimeTime extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				ProjectionsJframe projectionJf = new ProjectionsJframe();
+				TodayProjectionsJframe projectionJf = new TodayProjectionsJframe();
 				projectionJf.setVisible(true);
 				dispose();
 			}

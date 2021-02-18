@@ -63,7 +63,7 @@ public class InsertProjectionJframe extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				ProjectionsJframe projectionsjf = new ProjectionsJframe();
+				TodayProjectionsJframe projectionsjf = new TodayProjectionsJframe();
 				projectionsjf.setVisible(true);
 				dispose();
 			}
@@ -79,7 +79,7 @@ public class InsertProjectionJframe extends JFrame {
 		btnUndo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
-				ProjectionsJframe projjf = new ProjectionsJframe();
+				TodayProjectionsJframe projjf = new TodayProjectionsJframe();
 				projjf.setVisible(true);
 			}
 		});

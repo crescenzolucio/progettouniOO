@@ -1,5 +1,7 @@
 package Entity;
 
+import java.util.LinkedList;
+
 public class Film {
 	private Integer id_film;
 	private String titolo;
@@ -8,6 +10,8 @@ public class Film {
 	private String registaname;
 	private Integer durata_minuti;
 	private String url_poster;
+	private LinkedList<Integer> genres;
+	private LinkedList<Integer> actors;
 	public Integer getId_film() {
 		return id_film;
 	}
@@ -64,6 +68,18 @@ public class Film {
 	@Override
 	public String toString() {
 		return titolo;
+	}
+	public LinkedList<Integer> getGenres() {
+		return genres;
+	}
+	public void setGenres(LinkedList<Integer> genres) {
+		this.genres = genres;
+	}
+	public LinkedList<Integer> getActors() {
+		return actors;
+	}
+	public void setActors(LinkedList<Integer> actors) {
+		this.actors = actors;
 	}
 	
 	

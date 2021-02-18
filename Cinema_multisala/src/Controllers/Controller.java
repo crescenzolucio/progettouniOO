@@ -9,6 +9,7 @@ import DAO.AudioPostgreDAO;
 import DAO.CountryPostgreDAO;
 import DAO.DirectorPostgreDAO;
 import DAO.FilmPostgreDAO;
+import DAO.GenrePostgreDAO;
 import DAO.ProjectionPostgreDAO;
 import DAO.RoomPostgreDAO;
 import DAO.TechnologyPostgreDAO;
@@ -20,6 +21,7 @@ import Entity.Audio;
 import Entity.Country;
 import Entity.Director;
 import Entity.Film;
+import Entity.Genre;
 import Entity.Projection;
 import Entity.Room;
 import Entity.Technology;
@@ -30,6 +32,7 @@ import Interfaces.AudioDAO;
 import Interfaces.CountryDAO;
 import Interfaces.DirectorDAO;
 import Interfaces.FilmDAO;
+import Interfaces.GenreDAO;
 import Interfaces.ProjectionDAO;
 import Interfaces.RoomDAO;
 import Interfaces.TechnologyDAO;
@@ -50,9 +53,9 @@ public class Controller {
 		UserDAO usDAO = new UserPostgreDAO();
 		return usDAO.addUser(user.getUser(),user.getPassword(),user.getEmail());
 	}
-	public List<Projection> findProjections() {
+	public List<Projection> getProjectionsToday() {
 		ProjectionDAO pjDAO = new ProjectionPostgreDAO();
-		return pjDAO.findProjectionsToday();
+		return pjDAO.getProjectionsToday();
 	}
 	public String nameFilm(Integer idfilm) {
 		FilmDAO filmDAO = new FilmPostgreDAO();
@@ -134,6 +137,10 @@ public class Controller {
 		RoomDAO roomDAO = new RoomPostgreDAO();
 		return roomDAO.deleteRoom(idroom);
 	}
+	public Integer deleteProjection(Integer idpj){
+		ProjectionDAO ProjectionDAO = new ProjectionPostgreDAO();
+		return ProjectionDAO.deleteProjection(idpj);
+	}
 	public Technology getTechnology(Integer idtec){
 		TechnologyDAO tecDAO = new TechnologyPostgreDAO();
 		return tecDAO.getTechnology(idtec);
@@ -149,5 +156,21 @@ public class Controller {
 	public boolean insertDirector(Director director) {
 		DirectorDAO directorDAO = new DirectorPostgreDAO();
 		return directorDAO.insertDirector(director);
+	}
+	public List<Projection> getProjections() {
+		ProjectionDAO pjDAO = new ProjectionPostgreDAO();
+		return pjDAO.getProjections();
+	}
+	public String getFilm(Integer idfilm) {
+		FilmDAO filmDAO = new FilmPostgreDAO();
+		return filmDAO.getFilm(idfilm);
+	}
+	public Room getRoom(Integer idroom) {
+		RoomDAO RoomDAO = new RoomPostgreDAO();
+		return RoomDAO.getRoom(idroom);
+	}
+	public List<Genre> getGenres() {
+		GenreDAO genreDAO = new GenrePostgreDAO();
+		return genreDAO.getGenres();
 	}
 }

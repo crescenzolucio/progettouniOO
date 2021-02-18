@@ -76,7 +76,7 @@ public class LoginJframe extends JFrame {
 				String Password = new String(passwordField.getPassword());
 				if(contruser.searchUser(User)) {
 					if(contruser.checkPasswordUser(User, Password)){
-						ProjectionsJframe projectionJF = new ProjectionsJframe();
+						TodayProjectionsJframe projectionJF = new TodayProjectionsJframe();
 						projectionJF.setVisible(true);
 						dispose();
 					}else {

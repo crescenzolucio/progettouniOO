@@ -72,7 +72,7 @@ public class RoomsJframe extends JFrame {
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {
-				ProjectionsJframe projectionsjf = new ProjectionsJframe();
+				TodayProjectionsJframe projectionsjf = new TodayProjectionsJframe();
 				projectionsjf.setVisible(true);
 				dispose();
 			}
@@ -141,9 +141,7 @@ public class RoomsJframe extends JFrame {
 					if(controller.deleteRoom(idroom) > 0) {
 						JOptionPane.showMessageDialog(null , "Deleted successfully");
 						textFieldFilter.setText("");
-					}else {
-						JOptionPane.showMessageDialog(null , "Nothing deleted");
-					}
+					}else JOptionPane.showMessageDialog(null , "Nothing deleted");
 				}
             }
         };
@@ -179,7 +177,7 @@ public class RoomsJframe extends JFrame {
 		JButton btnUndo = new JButton("Undo");
 		btnUndo.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				ProjectionsJframe pjframe =  new ProjectionsJframe();
+				TodayProjectionsJframe pjframe =  new TodayProjectionsJframe();
 				pjframe.setVisible(true);
 				dispose();
 			}
