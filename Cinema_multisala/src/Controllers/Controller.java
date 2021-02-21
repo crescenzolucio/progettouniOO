@@ -57,10 +57,6 @@ public class Controller {
 		ProjectionDAO pjDAO = new ProjectionPostgreDAO();
 		return pjDAO.getProjectionsToday();
 	}
-	public String nameFilm(Integer idfilm) {
-		FilmDAO filmDAO = new FilmPostgreDAO();
-		return filmDAO.getFilm(idfilm);
-	}
 	public Room nameRoom(Integer idroom) {
 		RoomDAO roomDAO = new RoomPostgreDAO();
 		return roomDAO.getRoom(idroom);
@@ -161,7 +157,7 @@ public class Controller {
 		ProjectionDAO pjDAO = new ProjectionPostgreDAO();
 		return pjDAO.getProjections();
 	}
-	public String getFilm(Integer idfilm) {
+	public Film getFilm(Integer idfilm) {
 		FilmDAO filmDAO = new FilmPostgreDAO();
 		return filmDAO.getFilm(idfilm);
 	}
@@ -169,8 +165,16 @@ public class Controller {
 		RoomDAO RoomDAO = new RoomPostgreDAO();
 		return RoomDAO.getRoom(idroom);
 	}
+	public Actor getActor(Integer idactor) {
+		ActorDAO ActorDAO = new ActorPostgreDAO();
+		return ActorDAO.getActor(idactor);
+	}
 	public List<Genre> getGenres() {
 		GenreDAO genreDAO = new GenrePostgreDAO();
 		return genreDAO.getGenres();
+	}
+	public Genre getGenre(Integer idgenre) {
+		GenreDAO GenreDAO = new GenrePostgreDAO();
+		return GenreDAO.getGenre(idgenre);
 	}
 }

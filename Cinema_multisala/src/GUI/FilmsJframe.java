@@ -59,9 +59,8 @@ public class FilmsJframe extends JFrame {
 	 * Create the frame.
 	 */
 	public FilmsJframe() {
-		Controller contruser = new Controller();
+		Controller controller = new Controller();
 	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
-	    
 	    setSize(screenSize.width/2, screenSize.height/2);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
 		setTitle("Films");
@@ -82,7 +81,7 @@ public class FilmsJframe extends JFrame {
 		String[] columnNames = {"Title","Year","Producer","Min.","Delete",""};
 		model.setColumnIdentifiers(columnNames);
 		
-		LinkedList<Film> list= (LinkedList<Film>) contruser.getFilms();
+		LinkedList<Film> list= (LinkedList<Film>) controller.getFilms();
 		for (Film film : list) {
 			  Object[] obj = new Object[6];
 			  obj[0] = film.getTitolo();
@@ -104,6 +103,19 @@ public class FilmsJframe extends JFrame {
 				return column == 4 && value.equals("DELETE") ? true : false;
 		    }  
         };
+        //info film
+        table.addMouseListener(new java.awt.event.MouseAdapter() {
+            @Override
+            public void mouseClicked(java.awt.event.MouseEvent evt) {
+                int col = table.columnAtPoint(evt.getPoint());
+                if (col == 0) {
+                	Integer idfilm =  Integer.parseInt(table.getValueAt(table.getSelectedRow(),5).toString());
+                	InfoFilmJframe infojframe =  new InfoFilmJframe(idfilm);
+    				infojframe.setVisible(true);
+                }
+            }
+        });
+        
         //Sorter
         TableRowSorter<TableModel> sorter = new TableRowSorter<TableModel>(model);
         table.setRowSorter(sorter);
@@ -137,7 +149,7 @@ public class FilmsJframe extends JFrame {
 					Integer idfilm =  Integer.parseInt(table.getValueAt(table.getSelectedRow(),5).toString());
 					sorter.setRowFilter(null);
 					model.removeRow(table.getSelectedRow());
-					if(contruser.deleteFilm(idfilm) > 0) {
+					if(controller.deleteFilm(idfilm) > 0) {
 						JOptionPane.showMessageDialog(null , "Deleted successfully");
 						textFieldFilter.setText("");
 					}else {

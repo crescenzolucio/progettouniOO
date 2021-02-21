@@ -23,6 +23,10 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.util.LinkedList;
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -32,12 +36,15 @@ import javax.swing.JList;
 import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 public class InsertFilmJframe extends JFrame {
 
 	private JPanel contentPane;
 	private JTextField textFieldtitle;
 	private JTextField textFieldDuration;
+	private JTextField textFieldURL;
 
 	/**
 	 * Launch the application.
@@ -199,11 +206,21 @@ public class InsertFilmJframe extends JFrame {
 		contentPane.add(scrollPaneGenres);
 		contentPane.add(scrollPaneActors);
 		
+		
+		JLabel lblURL = new JLabel("URL Poster");
+		lblURL.setBounds(396, 232, 77, 14);
+		contentPane.add(lblURL);
+		
+		textFieldURL = new JTextField();
+		textFieldURL.setColumns(10);
+		textFieldURL.setBounds(492, 231, 86, 20);
+		contentPane.add(textFieldURL);
+		
 		JButton btnInsert = new JButton("Insert");
 		btnInsert.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				if(!textFieldYear.getText().equals("") && !textFieldDuration.getText().equals("")  && !textFieldtitle.getText().equals("") 
-						&& lblInvalidNumber.getText().equals("") && lblInvalidDuration.getText().equals("") && listGenres.getSelectedIndices().length>0 && listActors.getSelectedIndices().length>0) {
+						&& lblInvalidNumber.getText().equals("") && lblInvalidDuration.getText().equals("") && listGenres.getSelectedIndices().length>0 && listActors.getSelectedIndices().length>0 && checkUrl(textFieldURL.getText())) {
 					Film film = new Film();
 					film.setAnno_produzione(Integer.parseInt(textFieldYear.getText()));
 					film.setDurata_minuti(Integer.parseInt(textFieldDuration.getText()));
@@ -229,7 +246,7 @@ public class InsertFilmJframe extends JFrame {
 					}
 					film.setActors(actorsselected);
 					
-					film.setUrl_poster("");
+					film.setUrl_poster(textFieldURL.getText());
 					film.setTitolo(textFieldtitle.getText());
 					if(controller.insertFilm(film)) {
 							JOptionPane.showMessageDialog(null, "Film created!");
@@ -241,5 +258,28 @@ public class InsertFilmJframe extends JFrame {
 		});
 		btnInsert.setBounds(186, 263, 89, 23);
 		contentPane.add(btnInsert);
+	}
+	public boolean checkUrl(String url) {
+        BufferedImage image;
+		try {
+			image = ImageIO.read(new URL(textFieldURL.getText()));
+			if (image != null) { 
+				JOptionPane.showMessageDialog(null, "URL image valid!");
+			} else 	{
+				JOptionPane.showMessageDialog(null, "URL image not valid!");
+				return false;
+			}
+		} catch (MalformedURLException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Image  not valid!");
+			return false;
+		} catch (IOException e1) {
+			// TODO Auto-generated catch block
+			e1.printStackTrace();
+			JOptionPane.showMessageDialog(null, "Image not valid!");
+			return false;
+		}  
+		return true;
 	}
 }

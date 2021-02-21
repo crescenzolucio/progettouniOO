@@ -142,7 +142,7 @@ public class TodayProjectionsJframe extends JFrame {
 			  Object[] obj = new Object[8];
 			  Integer notavailable = contruser.seatsNotAvailableProjection(pj.getIdpj());
 			  Integer roomseats = contruser.nameRoom(pj.getIdsala()).getPosti();
-			  obj[0] = contruser.nameFilm(pj.getIdfilm());
+			  obj[0] = contruser.getFilm(pj.getIdfilm()).getTitolo();
 			  obj[1] = new SimpleDateFormat("yyyy-MM-dd hh:mm").format(pj.getStartpj());
 			  obj[2] = new SimpleDateFormat("yyyy-MM-dd hh:mm").format(pj.getEndpj());
 			  obj[3] = contruser.nameRoom(pj.getIdsala()).getDescrizione();

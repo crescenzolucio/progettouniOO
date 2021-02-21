@@ -55,4 +55,27 @@ public class ActorPostgreDAO implements ActorDAO{
 	        }
 			return true;
 		}
+		
+		public Actor getActor(Integer idactor) {
+			String Query = "Select * from attori a where a.id_attore=?";
+			Connectiondb connection_db =new Connectiondb();
+	        Connection con=connection_db.get_connection();
+	        Actor actor = new Actor();
+	        try {
+	            PreparedStatement ps = con.prepareStatement(Query);
+	            ps.setInt(1, idactor);
+	            ResultSet rs =  ps.executeQuery();
+	            if (!rs.next()) { 
+	            	System.out.println("No records found");
+				}else {
+					actor.setIdactor(idactor);
+					actor.setName(rs.getString("nominativo"));
+	            	actor.setCountry(rs.getInt("paese_di_origine"));
+	            	actor.setDateofbirth(rs.getDate("data_nascita"));
+				}
+	            con.close();
+	        } catch(SQLException ex) {
+	        }
+			return actor;
+		}
 }
