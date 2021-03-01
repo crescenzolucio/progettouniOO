@@ -40,7 +40,10 @@ import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 
 public class InsertFilmJframe extends JFrame {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1;
 	private JPanel contentPane;
 	private JTextField textFieldtitle;
 	private JTextField textFieldDuration;
@@ -114,16 +117,16 @@ public class InsertFilmJframe extends JFrame {
 		lblDuration.setBounds(396, 157, 89, 14);
 		contentPane.add(lblDuration);
 		
-		JButton btnUndo = new JButton("Undo");
-		btnUndo.addActionListener(new ActionListener() {
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FilmsJframe filmsjf = new FilmsJframe();
 				filmsjf.setVisible(true);
 				dispose();
 			}
 		});
-		btnUndo.setBounds(396, 263, 89, 23);
-		contentPane.add(btnUndo);
+		btnBack.setBounds(396, 263, 89, 23);
+		contentPane.add(btnBack);
 		
 		JLabel lblInvalidDuration = new JLabel("");
 		lblInvalidDuration.setForeground(Color.RED);

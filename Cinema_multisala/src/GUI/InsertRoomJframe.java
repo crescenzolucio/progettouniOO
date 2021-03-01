@@ -1,6 +1,5 @@
 package GUI;
 
-import java.awt.BorderLayout;
 import java.awt.EventQueue;
 import java.awt.Toolkit;
 
@@ -11,7 +10,6 @@ import javax.swing.border.EmptyBorder;
 
 import Controllers.Controller;
 import Entity.Audio;
-import Entity.Director;
 import Entity.Room;
 import Entity.Technology;
 
@@ -28,7 +26,10 @@ import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
 
 public class InsertRoomJframe extends JFrame {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1;
 	private JPanel contentPane;
 	private JTextField textFieldDescription;
 	private JTextField textFieldSeats;
@@ -54,6 +55,7 @@ public class InsertRoomJframe extends JFrame {
 	 */
 	public InsertRoomJframe() {
 		Controller controller =  new Controller();
+
 		setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 		setBounds(100, 100, 450, 300);
 		contentPane = new JPanel();
@@ -76,16 +78,16 @@ public class InsertRoomJframe extends JFrame {
 		});
 
 		
-		JButton btnUndo = new JButton("Undo");
-		btnUndo.addActionListener(new ActionListener() {
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				RoomsJframe roomsjf = new RoomsJframe();
 				roomsjf.setVisible(true);
 			}
 		});
-		btnUndo.setBounds(431, 181, 89, 23);
-		contentPane.add(btnUndo);
+		btnBack.setBounds(431, 181, 89, 23);
+		contentPane.add(btnBack);
 		
 		JLabel lblAudio = new JLabel("Audio");
 		lblAudio.setBounds(116, 113, 77, 14);
@@ -151,8 +153,8 @@ public class InsertRoomJframe extends JFrame {
 				if(!textFieldDescription.getText().equals("") && !textFieldSeats.getText().equals("") && lblInvalidSeats.getText().equals("") ) {
 					
 					Room room = new Room();
-					room.setDescrizione(textFieldDescription.getText());
-					room.setPosti(Integer.parseInt(textFieldSeats.getText()));
+					room.setDescription(textFieldDescription.getText());
+					room.setSeats(Integer.parseInt(textFieldSeats.getText()));
 					
 					Object itemTechnology = comboBoxTechProjection.getSelectedItem();
 					room.setTechproj(((Technology)itemTechnology).getIdtecnology());

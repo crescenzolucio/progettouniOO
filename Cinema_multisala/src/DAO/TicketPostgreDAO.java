@@ -4,10 +4,6 @@ import java.sql.Connection;
 import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import java.sql.Timestamp;
-import java.util.LinkedList;
-
-import Entity.Projection;
 import Entity.Ticket;
 import Interfaces.TicketDAO;
 
@@ -35,7 +31,6 @@ public class TicketPostgreDAO implements TicketDAO{
 		String Query = "Select max(b.id_biglietto) from biglietti b";
 		Connectiondb connection_db =new Connectiondb();
         Connection con=connection_db.get_connection();
-        LinkedList<Projection> list = new LinkedList<Projection>();
         try {
             PreparedStatement ps = con.prepareStatement(Query);
             ResultSet rs =  ps.executeQuery();

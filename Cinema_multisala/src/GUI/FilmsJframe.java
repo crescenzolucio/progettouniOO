@@ -14,7 +14,6 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
@@ -22,7 +21,6 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import Controllers.Controller;
-import Entity.Director;
 import Entity.Film;
 import ImportedClass.ButtonColumn;
 
@@ -37,6 +35,10 @@ import java.awt.event.ActionListener;
 
 public class FilmsJframe extends JFrame {
 
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1;
 	private JTextField textFieldFilter;
 
 	/**
@@ -187,32 +189,32 @@ public class FilmsJframe extends JFrame {
 		btnNewFilm.setBounds(388, -1, 89, 23);
 		getContentPane().add(btnNewFilm);
 		
-		JButton btnUndo = new JButton("Undo");
-		btnUndo.addActionListener(new ActionListener() {
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TodayProjectionsJframe pjframe =  new TodayProjectionsJframe();
 				pjframe.setVisible(true);
 				dispose();
 			}
 		});
-		btnUndo.setBounds(667, -1, 89, 23);
-		getContentPane().add(btnUndo);
+		btnBack.setBounds(667, -1, 89, 23);
+		getContentPane().add(btnBack);
 		
 		//Filter
 		JLabel lblFilter = new JLabel("Filter");
 		lblFilter.setBounds(10, 3, 46, 14);
 		getContentPane().add(lblFilter);
 		
-		JButton btnUndo_1 = new JButton("New Actor/Producer");
-		btnUndo_1.addActionListener(new ActionListener() {
+		JButton btnBack_1 = new JButton("New Actor/Producer");
+		btnBack_1.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				InsertActorProducerJframe insertactorproducerjf = new InsertActorProducerJframe();
 				insertactorproducerjf.setVisible(true);
 				dispose();
 			}
 		});
-		btnUndo_1.setBounds(487, -1, 170, 23);
-		getContentPane().add(btnUndo_1);
+		btnBack_1.setBounds(487, -1, 170, 23);
+		getContentPane().add(btnBack_1);
 		textFieldFilter.getDocument().addDocumentListener(new DocumentListener() {
 			@Override
 			public void insertUpdate(DocumentEvent e) {

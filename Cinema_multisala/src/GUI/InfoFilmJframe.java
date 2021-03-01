@@ -5,12 +5,8 @@ import java.awt.Image;
 import java.awt.Toolkit;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.io.File;
 import java.io.IOException;
-import java.net.MalformedURLException;
 import java.net.URL;
-import java.nio.file.Path;
-
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFrame;
@@ -23,7 +19,10 @@ import Entity.Film;
 import javax.swing.JLabel;
 
 public class InfoFilmJframe extends JFrame {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1;
 	private JPanel contentPane;
 
 	/**
@@ -41,6 +40,7 @@ public class InfoFilmJframe extends JFrame {
 	 */
 	public InfoFilmJframe(Integer idfilm) {
 		Controller controller = new Controller();
+
 	    Film film = controller.getFilm(idfilm);
 	    String actors="",genres="";
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

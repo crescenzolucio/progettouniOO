@@ -14,7 +14,6 @@ import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
-import javax.swing.JPanel;
 import javax.swing.event.DocumentEvent;
 import javax.swing.event.DocumentListener;
 import javax.swing.table.DefaultTableModel;
@@ -22,8 +21,6 @@ import javax.swing.table.TableModel;
 import javax.swing.table.TableRowSorter;
 
 import Controllers.Controller;
-import Entity.Director;
-import Entity.Film;
 import Entity.Room;
 import ImportedClass.ButtonColumn;
 
@@ -37,7 +34,10 @@ import javax.swing.JButton;
 import java.awt.event.ActionListener;
 
 public class RoomsJframe extends JFrame {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1;
 	private JTextField textFieldFilter;
 
 	/**
@@ -86,12 +86,12 @@ public class RoomsJframe extends JFrame {
 		LinkedList<Room> list= (LinkedList<Room>) controller.getRooms();
 		for (Room room : list) {
 			  Object[] obj = new Object[6];
-			  obj[0] = room.getDescrizione();
+			  obj[0] = room.getDescription();
 			  obj[1] = room.getTechaudiodesc();
 			  obj[2] = room.getTechprojdesc();
-			  obj[3] = room.getPosti();
+			  obj[3] = room.getSeats();
 			  obj[4] = "DELETE";
-			  obj[5] = room.getIdsala();
+			  obj[5] = room.getIdroom();
 			  model.addRow(obj);
 			}
 		
@@ -174,16 +174,16 @@ public class RoomsJframe extends JFrame {
 		btnNewFilm.setBounds(388, -1, 101, 23);
 		getContentPane().add(btnNewFilm);
 		
-		JButton btnUndo = new JButton("Undo");
-		btnUndo.addActionListener(new ActionListener() {
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TodayProjectionsJframe pjframe =  new TodayProjectionsJframe();
 				pjframe.setVisible(true);
 				dispose();
 			}
 		});
-		btnUndo.setBounds(499, -1, 89, 23);
-		getContentPane().add(btnUndo);
+		btnBack.setBounds(499, -1, 89, 23);
+		getContentPane().add(btnBack);
 		
 		//Filter
 		JLabel lblFilter = new JLabel("Filter");

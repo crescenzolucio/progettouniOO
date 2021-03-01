@@ -34,7 +34,10 @@ import Entity.Projection;
 import ImportedClass.ButtonColumn;
 
 public class ProjectionsJframe extends JFrame {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1;
 	private JTextField textFieldFilter;
 
 	/**
@@ -178,16 +181,16 @@ public class ProjectionsJframe extends JFrame {
 		btnNewProjection.setBounds(388, -1, 125, 23);
 		getContentPane().add(btnNewProjection);
 		
-		JButton btnUndo = new JButton("Undo");
-		btnUndo.addActionListener(new ActionListener() {
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TodayProjectionsJframe pjframe =  new TodayProjectionsJframe();
 				pjframe.setVisible(true);
 				dispose();
 			}
 		});
-		btnUndo.setBounds(523, -1, 89, 23);
-		getContentPane().add(btnUndo);
+		btnBack.setBounds(523, -1, 89, 23);
+		getContentPane().add(btnBack);
 		
 		//Filter
 		JLabel lblFilter = new JLabel("Filter");

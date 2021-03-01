@@ -8,7 +8,6 @@ import java.util.Date;
 import java.util.LinkedList;
 
 import Entity.Actor;
-import Entity.Film;
 import Interfaces.ActorDAO;
 
 public class ActorPostgreDAO implements ActorDAO{

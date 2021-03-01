@@ -61,7 +61,7 @@ public class ViewPostgreDAO implements ViewDAO{
 	}
 	public TableModel PrimeTimeRoomsView(){
 		String Query = "SELECT * FROM affluenza_sale_orari_max";
-		Controller control = new Controller();
+		Controller controller = new Controller();
 		Connectiondb connection_db =new Connectiondb();
 		DefaultTableModel model = new DefaultTableModel();
         Connection con=connection_db.get_connection();
@@ -72,8 +72,8 @@ public class ViewPostgreDAO implements ViewDAO{
     		model.setColumnIdentifiers(columnNames);
             while (rs.next()) { 
             	  String count = rs.getString("conta");
-            	  Room roomobj = control.nameRoom(Integer.parseInt(rs.getString("id_sala")));
-            	  String room = roomobj.getDescrizione();
+            	  Room roomobj = controller.nameRoom(Integer.parseInt(rs.getString("id_sala")));
+            	  String room = roomobj.getDescription();
             	  String start = rs.getString("fasciainizio");
             	  String end = rs.getString("fasciafine");
             	  model.addRow(new Object[]{count, room, start,end});

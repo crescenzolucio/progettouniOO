@@ -11,8 +11,6 @@ import Controllers.Controller;
 import Entity.Actor;
 import Entity.Country;
 import Entity.Director;
-import Entity.Room;
-
 import javax.swing.JTextField;
 import javax.swing.JLabel;
 import javax.swing.JOptionPane;
@@ -20,7 +18,6 @@ import javax.swing.ButtonGroup;
 import javax.swing.JButton;
 import java.awt.event.WindowAdapter;
 import java.awt.event.WindowEvent;
-import java.util.Calendar;
 import java.util.Date;
 import java.awt.Color;
 import java.awt.event.ActionListener;
@@ -30,7 +27,10 @@ import com.toedter.calendar.JDateChooser;
 import javax.swing.JRadioButton;
 
 public class InsertActorProducerJframe extends JFrame {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1;
 	private JPanel contentPane;
 	private JTextField textFieldname;
 
@@ -90,16 +90,16 @@ public class InsertActorProducerJframe extends JFrame {
 		lblBirth.setBounds(398, 66, 89, 14);
 		contentPane.add(lblBirth);
 		
-		JButton btnUndo = new JButton("Undo");
-		btnUndo.addActionListener(new ActionListener() {
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				FilmsJframe filmsjf = new FilmsJframe();
 				filmsjf.setVisible(true);
 				dispose();
 			}
 		});
-		btnUndo.setBounds(398, 183, 89, 23);
-		contentPane.add(btnUndo);
+		btnBack.setBounds(398, 183, 89, 23);
+		contentPane.add(btnBack);
 		
 		JLabel lblInvalidDuration = new JLabel("");
 		lblInvalidDuration.setForeground(Color.RED);
@@ -110,7 +110,7 @@ public class InsertActorProducerJframe extends JFrame {
 		lblCountry.setBounds(398, 127, 77, 14);
 		contentPane.add(lblCountry);
 		
-		JComboBox comboBoxCountry = new JComboBox(controller.getCountries().toArray());
+		JComboBox<Object> comboBoxCountry = new JComboBox<Object>(controller.getCountries().toArray());
 		comboBoxCountry.setEditable(false);
 		comboBoxCountry.setBounds(454, 123, 125, 22);
 		contentPane.add(comboBoxCountry);

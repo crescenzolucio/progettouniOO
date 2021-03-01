@@ -5,12 +5,9 @@ import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
-import java.sql.Timestamp;
 import java.util.LinkedList;
 
 import Entity.Film;
-import Entity.Projection;
-import Entity.Ticket;
 import Interfaces.FilmDAO;
 
 public class FilmPostgreDAO implements FilmDAO{
@@ -95,17 +92,12 @@ public class FilmPostgreDAO implements FilmDAO{
 	}
 	
 	public Integer deleteFilm(Integer idfilm) {
-		String Query = "DELETE FROM FILM F WHERE F.ID_FILM=?";
+		//delete actors
+		String Query = "DELETE FROM attori_film A WHERE A.ID_FILM=?";
 		Connectiondb connection_db =new Connectiondb();
         Connection con=connection_db.get_connection();
         try {
             PreparedStatement ps = con.prepareStatement(Query);
-            ps.setInt(1, idfilm);
-            ps.executeUpdate();
-            
-            //delete actors
-            Query = "DELETE FROM attori_film A WHERE A.ID_FILM=?";
-            ps = con.prepareStatement(Query);
             ps.setInt(1, idfilm);
             ps.executeUpdate();
             
@@ -114,6 +106,11 @@ public class FilmPostgreDAO implements FilmDAO{
             ps = con.prepareStatement(Query);
             ps.setInt(1, idfilm);
             
+            //delete film
+            Query = "DELETE FROM FILM F WHERE F.ID_FILM=?";
+            ps = con.prepareStatement(Query);
+            ps.setInt(1, idfilm);
+
             return ps.executeUpdate(); 
         } catch(SQLException ex) {
         	ex.printStackTrace();

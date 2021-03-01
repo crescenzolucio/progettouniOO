@@ -1,31 +1,31 @@
 package Entity;
 
 public class Room {
-	private Integer idsala;
-	private String  descrizione;
-	private Integer posti;
+	private Integer idroom;
+	private String  description;
+	private Integer seats;
 	private Integer techaudio;
 	private String  techaudiodesc;
 	private Integer techproj;
 	private String  techprojdesc;
 
-	public Integer getIdsala() {
-		return idsala;
+	public Integer getIdroom() {
+		return idroom;
 	}
-	public void setIdsala(Integer idsala) {
-		this.idsala = idsala;
+	public void setIdroom(Integer idroom) {
+		this.idroom = idroom;
 	}
-	public String getDescrizione() {
-		return descrizione;
+	public String getDescription() {
+		return description;
 	}
-	public void setDescrizione(String descrizione) {
-		this.descrizione = descrizione;
+	public void setDescription(String Description) {
+		this.description = Description;
 	}
-	public Integer getPosti() {
-		return posti;
+	public Integer getSeats() {
+		return seats;
 	}
-	public void setPosti(Integer posti) {
-		this.posti = posti;
+	public void setSeats(Integer Seats) {
+		this.seats = Seats;
 	}
 	public Integer getTechaudio() {
 		return techaudio;
@@ -54,13 +54,13 @@ public class Room {
 	public Room() {}
 	@Override
 	public String toString() {
-		return descrizione;
+		return description;
 	}
-	public Room(Integer idsala, String descrizione, Integer posti, Integer techaudio,Integer techproj) {
+	public Room(Integer idroom, String description, Integer seats, Integer techaudio,Integer techproj) {
 		super();
-		this.idsala = idsala;
-		this.descrizione = descrizione;
-		this.posti = posti;
+		this.idroom = idroom;
+		this.description = description;
+		this.seats = seats;
 		this.techaudio = techaudio;
 		this.techproj = techproj;
 	}

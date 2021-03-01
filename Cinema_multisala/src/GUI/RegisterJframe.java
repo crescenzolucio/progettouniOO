@@ -11,7 +11,6 @@ import javax.swing.UIManager;
 import javax.swing.border.EmptyBorder;
 
 import Controllers.Controller;
-import DAO.UserPostgreDAO;
 import Entity.User;
 
 import javax.swing.JButton;
@@ -25,7 +24,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JPasswordField;
 
 public class RegisterJframe extends JFrame {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1;
 	private JPanel contentPane;
 	private JTextField textFieldEmail;
 	private JTextField textFieldUser;
@@ -52,7 +54,7 @@ public class RegisterJframe extends JFrame {
 	 * Create the frame.
 	 */
 	public RegisterJframe() {
-		Controller contruser = new Controller();
+		Controller controller = new Controller();
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
 		setTitle("Register here");
@@ -83,7 +85,7 @@ public class RegisterJframe extends JFrame {
 				if(Password.equals(ConfirmPassword)) {
 					if(checkEmail(Email)) {
 						User user = new User(User, Password, Email);
-						contruser.addInfoUser(user);
+						controller.addInfoUser(user);
 						LoginJframe login = new LoginJframe();
 						login.setVisible(true);
 						setVisible(false);

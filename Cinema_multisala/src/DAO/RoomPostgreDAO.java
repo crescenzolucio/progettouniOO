@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.LinkedList;
 
-import Entity.Film;
 import Entity.Room;
 import Interfaces.RoomDAO;
 
@@ -24,8 +23,8 @@ public class RoomPostgreDAO implements RoomDAO{
             if (!rs.next()) { 
                 System.out.println("No records found");
             }else {
-            	room.setDescrizione(rs.getString("descrizione"));
-            	room.setPosti(rs.getInt("posti"));
+            	room.setDescription(rs.getString("descrizione"));
+            	room.setSeats(rs.getInt("posti"));
             	room.setTechaudio(rs.getInt("tecnologia_proiezione"));
             	room.setTechproj(rs.getInt("sistema_audio"));      		
             }
@@ -42,10 +41,10 @@ public class RoomPostgreDAO implements RoomDAO{
         Connection con=connection_db.get_connection();
         try {
             PreparedStatement ps = con.prepareStatement(Query);
-            ps.setString(1, room.getDescrizione());
+            ps.setString(1, room.getDescription());
             ps.setInt(2, room.getTechaudio());
             ps.setInt(3, room.getTechproj());
-            ps.setInt(4, room.getPosti());
+            ps.setInt(4, room.getSeats());
             ps.execute();
             ps.close();
             con.close();
@@ -68,13 +67,13 @@ public class RoomPostgreDAO implements RoomDAO{
 
             while (rs.next()) {
             	  Room room =  new Room();
-            	  room.setIdsala(rs.getInt("id_sala"));
-            	  room.setDescrizione(rs.getString("descrizione"));
+            	  room.setIdroom(rs.getInt("id_sala"));
+            	  room.setDescription(rs.getString("descrizione"));
             	  room.setTechprojdesc(rs.getString("tecnologia"));
             	  room.setTechaudio(rs.getInt("sistema_audio"));
             	  room.setTechproj(rs.getInt("tecnologia_proiezione"));
             	  room.setTechaudiodesc(rs.getString("audio"));
-            	  room.setPosti(rs.getInt("posti"));
+            	  room.setSeats(rs.getInt("posti"));
             	  list.add(room);
             	}
             con.close();

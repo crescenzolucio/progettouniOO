@@ -1,9 +1,7 @@
 package GUI;
 
-import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.print.PageFormat;
-import java.awt.print.Paper;
 import java.awt.print.Printable;
 import java.awt.print.PrinterAbortException;
 import java.awt.print.PrinterException;
@@ -37,7 +35,7 @@ public class TicketJframe extends JFrame {
 	 * Create the frame.
 	 */
 	public TicketJframe(Integer idpj,String price,String film,String room,String projectionstart,String projectionend, Integer seat) {
-		Controller contr = new Controller();
+		Controller controller = new Controller();
 		setVisible(true);
 		setBounds(100, 100, 600, 340);
 		contentPane = new JPanel();
@@ -51,9 +49,9 @@ public class TicketJframe extends JFrame {
 
 		JButton btnPrint = new JButton("Print");
 		JButton btnBuy = new JButton("Buy");
-		JButton btnBack = new JButton("Undo");
+		JButton btnBack = new JButton("Back");
 		
-		//UNDO
+		//Back
 		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				TodayProjectionsJframe frame = new TodayProjectionsJframe();
@@ -101,8 +99,8 @@ public class TicketJframe extends JFrame {
 		//BUY
 		btnBuy.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
-				Ticket ticket = new Ticket(idpj,contr.lastTicket()+1,0,Integer.parseInt(price.replace("€","")));
-				if(contr.buyTicket(ticket)) {
+				Ticket ticket = new Ticket(idpj,controller.lastTicket()+1,0,Integer.parseInt(price.replace("€","")));
+				if(controller.buyTicket(ticket)) {
 					JOptionPane.showMessageDialog(null, "Ticket created!");
 					btnPrint.setVisible(true);
 				}

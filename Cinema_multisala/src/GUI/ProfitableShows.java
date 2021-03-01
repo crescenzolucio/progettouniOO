@@ -9,10 +9,14 @@ import javax.swing.JFrame;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
+
 import Controllers.Controller;
 
 public class ProfitableShows extends JFrame {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1;
 	/**
 	 * Launch the application.
 	 */

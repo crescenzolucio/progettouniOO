@@ -6,27 +6,24 @@ import java.awt.EventQueue;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.LinkedList;
 
 import javax.swing.AbstractAction;
 import javax.swing.Action;
-import javax.swing.ImageIcon;
 import javax.swing.JFrame;
 import javax.swing.JMenuBar;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.table.DefaultTableModel;
+
 import Controllers.Controller;
 import Entity.Projection;
 import ImportedClass.ButtonColumn;
 
 import javax.swing.JMenuItem;
-import javax.swing.JOptionPane;
 import java.awt.event.ActionListener;
-import javax.swing.JCheckBoxMenuItem;
 import javax.swing.JMenu;
 
 public class TodayProjectionsJframe extends JFrame {
@@ -56,7 +53,8 @@ public class TodayProjectionsJframe extends JFrame {
 	 * Create the frame.
 	 */
 	public TodayProjectionsJframe() {
-		Controller contruser = new Controller();
+		Controller controller = new Controller();
+		
 	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    setSize(screenSize.width/2, screenSize.height/2);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
@@ -137,15 +135,15 @@ public class TodayProjectionsJframe extends JFrame {
 		String[] columnNames = {"Film","Start","End","Room","Price","Seats","Buy",""};
 		model.setColumnIdentifiers(columnNames);
 		
-		LinkedList<Projection> list= (LinkedList<Projection>) contruser.getProjectionsToday();
+		LinkedList<Projection> list= (LinkedList<Projection>) controller.getProjectionsToday();
 		for (Projection pj : list) {
 			  Object[] obj = new Object[8];
-			  Integer notavailable = contruser.seatsNotAvailableProjection(pj.getIdpj());
-			  Integer roomseats = contruser.nameRoom(pj.getIdsala()).getPosti();
-			  obj[0] = contruser.getFilm(pj.getIdfilm()).getTitolo();
+			  Integer notavailable = controller.seatsNotAvailableProjection(pj.getIdpj());
+			  Integer roomseats = controller.nameRoom(pj.getIdsala()).getSeats();
+			  obj[0] = controller.getFilm(pj.getIdfilm()).getTitolo();
 			  obj[1] = new SimpleDateFormat("yyyy-MM-dd hh:mm").format(pj.getStartpj());
 			  obj[2] = new SimpleDateFormat("yyyy-MM-dd hh:mm").format(pj.getEndpj());
-			  obj[3] = contruser.nameRoom(pj.getIdsala()).getDescrizione();
+			  obj[3] = controller.nameRoom(pj.getIdsala()).getDescription();
 			  obj[4] = pj.getPrice()+"€";
 			  obj[5] = notavailable+"/"+roomseats;
 			  if(notavailable.equals(roomseats)) {

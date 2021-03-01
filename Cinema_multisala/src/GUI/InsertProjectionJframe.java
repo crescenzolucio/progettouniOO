@@ -33,7 +33,10 @@ import java.awt.event.ActionEvent;
 import javax.swing.JSpinner;
 
 public class InsertProjectionJframe extends JFrame {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1;
 	private JPanel contentPane;
 	private JTextField textFieldPrice;
 
@@ -75,16 +78,16 @@ public class InsertProjectionJframe extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 
-		JButton btnUndo = new JButton("Undo");
-		btnUndo.addActionListener(new ActionListener() {
+		JButton btnBack = new JButton("Back");
+		btnBack.addActionListener(new ActionListener() {
 			public void actionPerformed(ActionEvent e) {
 				dispose();
 				TodayProjectionsJframe projjf = new TodayProjectionsJframe();
 				projjf.setVisible(true);
 			}
 		});
-		btnUndo.setBounds(418, 189, 89, 23);
-		contentPane.add(btnUndo);
+		btnBack.setBounds(418, 189, 89, 23);
+		contentPane.add(btnBack);
 		
 		JLabel lblPrice = new JLabel("Price");
 		lblPrice.setBounds(368, 108, 77, 14);
@@ -177,7 +180,7 @@ public class InsertProjectionJframe extends JFrame {
 					
 					//idroom
 					Object itemRoom = comboBoxRoom.getSelectedItem();
-					Integer idroom = ((Room)itemRoom).getIdsala();
+					Integer idroom = ((Room)itemRoom).getIdroom();
 					
 					//idfilm
 					Object itemFilm = comboBoxFilm.getSelectedItem();

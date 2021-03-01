@@ -7,8 +7,6 @@ import javax.swing.JPanel;
 import javax.swing.border.EmptyBorder;
 
 import Controllers.Controller;
-import DAO.UserPostgreDAO;
-
 import javax.swing.JTextField;
 import javax.swing.JButton;
 import java.awt.Color;
@@ -19,7 +17,10 @@ import javax.swing.JLabel;
 import javax.swing.JPasswordField;
 
 public class LoginJframe extends JFrame {
-
+	/**
+	 * 
+	 */
+	private static final long serialVersionUID = 1;
 	private JPanel contentPane;
 	private JTextField textFieldUser;
 	private JPasswordField passwordField;
@@ -44,7 +45,7 @@ public class LoginJframe extends JFrame {
 	 * Create the frame.
 	 */
 	public LoginJframe() {
-		Controller contruser = new Controller();
+		Controller controller = new Controller();
 		
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
 		setTitle("Cinema multisala");
@@ -74,8 +75,8 @@ public class LoginJframe extends JFrame {
 			public void actionPerformed(ActionEvent e) {
 				String User = textFieldUser.getText();
 				String Password = new String(passwordField.getPassword());
-				if(contruser.searchUser(User)) {
-					if(contruser.checkPasswordUser(User, Password)){
+				if(controller.searchUser(User)) {
+					if(controller.checkPasswordUser(User, Password)){
 						TodayProjectionsJframe projectionJF = new TodayProjectionsJframe();
 						projectionJF.setVisible(true);
 						dispose();

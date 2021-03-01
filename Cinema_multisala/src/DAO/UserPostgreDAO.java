@@ -6,7 +6,6 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 
 
-import Entity.User;
 import Interfaces.UserDAO;
 
 public class UserPostgreDAO implements UserDAO{
