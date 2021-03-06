@@ -4,11 +4,11 @@ import java.util.LinkedList;
 
 public class Film {
 	private Integer id_film;
-	private String titolo;
-	private Integer anno_produzione;
-	private Integer id_registra;
+	private String title;
+	private Integer year_production;
+	private Integer id_director;
 	private String registaname;
-	private Integer durata_minuti;
+	private Integer minutes;
 	private String url_poster;
 	private LinkedList<Integer> genres;
 	private LinkedList<Integer> actors;
@@ -18,35 +18,23 @@ public class Film {
 	public void setId_film(Integer id_film) {
 		this.id_film = id_film;
 	}
-	public String getTitolo() {
-		return titolo;
+	public String getTitle() {
+		return title;
 	}
-	public void setTitolo(String titolo) {
-		this.titolo = titolo;
+	public void setTitle(String title) {
+		this.title = title;
 	}
-	public Integer getAnno_produzione() {
-		return anno_produzione;
+	public Integer getYear_production() {
+		return year_production;
 	}
-	public void setAnno_produzione(Integer anno_produzione) {
-		this.anno_produzione = anno_produzione;
+	public void setYear_production(Integer year_production) {
+		this.year_production = year_production;
 	}
-	public Integer getId_registra() {
-		return id_registra;
+	public Integer getId_director() {
+		return id_director;
 	}
-	public void setId_registra(Integer id_registra) {
-		this.id_registra = id_registra;
-	}
-	public Integer getDurata_minuti() {
-		return durata_minuti;
-	}
-	public void setDurata_minuti(Integer durata_minuti) {
-		this.durata_minuti = durata_minuti;
-	}
-	public String getUrl_poster() {
-		return url_poster;
-	}
-	public void setUrl_poster(String url_poster) {
-		this.url_poster = url_poster;
+	public void setId_director(Integer id_director) {
+		this.id_director = id_director;
 	}
 	public String getRegistaname() {
 		return registaname;
@@ -54,20 +42,17 @@ public class Film {
 	public void setRegistaname(String registaname) {
 		this.registaname = registaname;
 	}
-	public Film(Integer id_film, String titolo, Integer anno_produzione, Integer id_registra, Integer durata_minuti,
-			String url_poster) {
-		super();
-		this.id_film = id_film;
-		this.titolo = titolo;
-		this.anno_produzione = anno_produzione;
-		this.id_registra = id_registra;
-		this.durata_minuti = durata_minuti;
-		this.url_poster = url_poster;
+	public Integer getMinutes() {
+		return minutes;
 	}
-	public Film() {}
-	@Override
-	public String toString() {
-		return titolo;
+	public void setMinutes(Integer minutes) {
+		this.minutes = minutes;
+	}
+	public String getUrl_poster() {
+		return url_poster;
+	}
+	public void setUrl_poster(String url_poster) {
+		this.url_poster = url_poster;
 	}
 	public LinkedList<Integer> getGenres() {
 		return genres;
@@ -81,7 +66,16 @@ public class Film {
 	public void setActors(LinkedList<Integer> actors) {
 		this.actors = actors;
 	}
-	
-	
-	
+	public Film() {} 
+	public Film(Integer id_film, String title, Integer year_production, Integer id_director, Integer minutes,
+			String url_poster) {
+		super();
+		this.id_film = id_film;
+		this.title = title;
+		this.year_production = year_production;
+		this.id_director = id_director;
+		this.minutes = minutes;
+		this.url_poster = url_poster;
+	}
 }
+	

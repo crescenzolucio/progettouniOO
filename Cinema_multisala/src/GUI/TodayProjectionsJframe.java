@@ -140,7 +140,7 @@ public class TodayProjectionsJframe extends JFrame {
 			  Object[] obj = new Object[8];
 			  Integer notavailable = controller.seatsNotAvailableProjection(pj.getIdpj());
 			  Integer roomseats = controller.nameRoom(pj.getIdsala()).getSeats();
-			  obj[0] = controller.getFilm(pj.getIdfilm()).getTitolo();
+			  obj[0] = controller.getFilm(pj.getIdfilm()).getTitle();
 			  obj[1] = new SimpleDateFormat("yyyy-MM-dd hh:mm").format(pj.getStartpj());
 			  obj[2] = new SimpleDateFormat("yyyy-MM-dd hh:mm").format(pj.getEndpj());
 			  obj[3] = controller.nameRoom(pj.getIdsala()).getDescription();

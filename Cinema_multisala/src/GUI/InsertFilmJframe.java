@@ -225,11 +225,11 @@ public class InsertFilmJframe extends JFrame {
 				if(!textFieldYear.getText().equals("") && !textFieldDuration.getText().equals("")  && !textFieldtitle.getText().equals("") 
 						&& lblInvalidNumber.getText().equals("") && lblInvalidDuration.getText().equals("") && listGenres.getSelectedIndices().length>0 && listActors.getSelectedIndices().length>0 && checkUrl(textFieldURL.getText())) {
 					Film film = new Film();
-					film.setAnno_produzione(Integer.parseInt(textFieldYear.getText()));
-					film.setDurata_minuti(Integer.parseInt(textFieldDuration.getText()));
+					film.setYear_production(Integer.parseInt(textFieldYear.getText()));
+					film.setMinutes(Integer.parseInt(textFieldDuration.getText()));
 					
 					Object itemDirector = comboBoxDirector.getSelectedItem();
-					film.setId_registra(((Director)itemDirector).getId_director());
+					film.setId_director(((Director)itemDirector).getId_director());
 					
 					LinkedList<Integer> genresselected = new LinkedList<>();
 					LinkedList<Integer> actorsselected = new LinkedList<>();
@@ -250,7 +250,7 @@ public class InsertFilmJframe extends JFrame {
 					film.setActors(actorsselected);
 					
 					film.setUrl_poster(textFieldURL.getText());
-					film.setTitolo(textFieldtitle.getText());
+					film.setTitle(textFieldtitle.getText());
 					if(controller.insertFilm(film)) {
 							JOptionPane.showMessageDialog(null, "Film created!");
 							textFieldYear.setText(""); textFieldYear.setText(""); textFieldDuration.setText(""); textFieldtitle.setText("");

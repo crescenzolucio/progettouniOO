@@ -86,10 +86,10 @@ public class FilmsJframe extends JFrame {
 		LinkedList<Film> list= (LinkedList<Film>) controller.getFilms();
 		for (Film film : list) {
 			  Object[] obj = new Object[6];
-			  obj[0] = film.getTitolo();
-			  obj[1] = film.getAnno_produzione();
+			  obj[0] = film.getTitle();
+			  obj[1] = film.getYear_production();
 			  obj[2] = film.getRegistaname();
-			  obj[3] = film.getDurata_minuti();
+			  obj[3] = film.getMinutes();
 			  obj[4] = "DELETE";
 			  obj[5] = film.getId_film();
 			  model.addRow(obj);

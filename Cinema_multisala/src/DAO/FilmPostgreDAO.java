@@ -27,10 +27,10 @@ public class FilmPostgreDAO implements FilmDAO{
                 System.out.println("No records found");
             }else {
           	  film.setId_film(rs.getInt("id_film"));
-          	  film.setTitolo(rs.getString("titolo"));
-          	  film.setAnno_produzione(rs.getInt("anno_produzione"));
-          	  film.setId_registra(rs.getInt("id_regista"));
-          	  film.setDurata_minuti(rs.getInt("durata_minuti"));
+          	  film.setTitle(rs.getString("titolo"));
+          	  film.setYear_production(rs.getInt("anno_produzione"));
+          	  film.setId_director(rs.getInt("id_regista"));
+          	  film.setMinutes(rs.getInt("durata_minuti"));
           	  film.setUrl_poster(rs.getString("url_poster"));
           	  film.setRegistaname(rs.getString("nominativo"));
           	  
@@ -76,10 +76,10 @@ public class FilmPostgreDAO implements FilmDAO{
             while (rs.next()) {
             	  Film film =  new Film();
             	  film.setId_film(rs.getInt("id_film"));
-            	  film.setTitolo(rs.getString("titolo"));
-            	  film.setAnno_produzione(rs.getInt("anno_produzione"));
-            	  film.setId_registra(rs.getInt("id_regista"));
-            	  film.setDurata_minuti(rs.getInt("durata_minuti"));
+            	  film.setTitle(rs.getString("titolo"));
+            	  film.setYear_production(rs.getInt("anno_produzione"));
+            	  film.setId_director(rs.getInt("id_regista"));
+            	  film.setMinutes(rs.getInt("durata_minuti"));
             	  film.setUrl_poster(rs.getString("url_poster"));
             	  film.setRegistaname(rs.getString("nominativo"));
             	  list.add(film);
@@ -124,10 +124,10 @@ public class FilmPostgreDAO implements FilmDAO{
         Connection con=connection_db.get_connection();
         try {
             PreparedStatement ps = con.prepareStatement(Query,Statement.RETURN_GENERATED_KEYS);
-            ps.setString(1, film.getTitolo());
-            ps.setInt(2, film.getAnno_produzione());
-            ps.setInt(3, film.getId_registra());
-            ps.setInt(4, film.getDurata_minuti());
+            ps.setString(1, film.getTitle());
+            ps.setInt(2, film.getYear_production());
+            ps.setInt(3, film.getId_director());
+            ps.setInt(4, film.getMinutes());
             ps.setString(5, film.getUrl_poster());
             ps.executeUpdate();
             

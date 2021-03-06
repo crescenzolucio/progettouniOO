@@ -71,7 +71,7 @@ public class InfoFilmJframe extends JFrame {
 
 		JLabel lblTitleInfo = new JLabel("");
 		lblTitleInfo.setBounds(89, 258, 245, 14);
-		lblTitleInfo.setText(film.getTitolo());
+		lblTitleInfo.setText(film.getTitle());
 		contentPane.add(lblTitleInfo);
 		
 		JLabel lblGenres = new JLabel("Genres");
@@ -125,7 +125,7 @@ public class InfoFilmJframe extends JFrame {
 		
 		JLabel lblMinutesInfo = new JLabel("");
 		lblMinutesInfo.setBounds(89, 361, 245, 14);
-		lblMinutesInfo.setText(film.getDurata_minuti().toString());
+		lblMinutesInfo.setText(film.getMinutes().toString());
 		contentPane.add(lblMinutesInfo);
 		
 		JLabel lblTilte = new JLabel("Title");
