@@ -12,7 +12,7 @@ import Interfaces.TechnologyDAO;
 public class TechnologyPostgreDAO implements TechnologyDAO{
 	public LinkedList<Technology> getTechnologies() {
 		String Query = "SELECT * FROM tecnologie_proiezione a order by a.tecnologia asc";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         LinkedList<Technology> list = new LinkedList<Technology>();
         try {
@@ -35,7 +35,7 @@ public class TechnologyPostgreDAO implements TechnologyDAO{
 	
 	public Technology getTechnology(Integer idtec) {
 		String Query = "Select * from tecnologie_proiezione t where t.id_tec=?";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
     	Technology tec = new Technology();  
         try {

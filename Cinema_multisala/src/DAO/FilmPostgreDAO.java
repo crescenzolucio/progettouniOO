@@ -13,7 +13,7 @@ import Interfaces.FilmDAO;
 public class FilmPostgreDAO implements FilmDAO{
 	public Film getFilm(Integer idfilm) {
 		String Query = "Select f.*,r.nominativo from film f join registi r on r.id_regista = f.id_regista where  f.id_film=? order by f.titolo ";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         Film film = new Film();
         LinkedList<Integer> actors = new LinkedList<Integer>();
@@ -66,7 +66,7 @@ public class FilmPostgreDAO implements FilmDAO{
 	
 	public LinkedList<Film> getFilms() {
 		String Query = "Select f.*,r.nominativo from film f join registi r on r.id_regista = f.id_regista order by f.titolo";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         LinkedList<Film> list = new LinkedList<Film>();
         try {
@@ -94,7 +94,7 @@ public class FilmPostgreDAO implements FilmDAO{
 	public Integer deleteFilm(Integer idfilm) {
 		//delete actors
 		String Query = "DELETE FROM attori_film A WHERE A.ID_FILM=?";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         try {
             PreparedStatement ps = con.prepareStatement(Query);
@@ -120,7 +120,7 @@ public class FilmPostgreDAO implements FilmDAO{
 	
 	public boolean insertFilm(Film film) {
 		String Query = "INSERT INTO film(titolo, anno_produzione, id_regista, durata_minuti, url_poster) VALUES (?, ?, ?, ?, ?);";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         try {
             PreparedStatement ps = con.prepareStatement(Query,Statement.RETURN_GENERATED_KEYS);

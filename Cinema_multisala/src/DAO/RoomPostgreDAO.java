@@ -12,7 +12,7 @@ import Interfaces.RoomDAO;
 public class RoomPostgreDAO implements RoomDAO{
 	public Room getRoom(Integer idroom) {
 		String Query = "Select * from sale s where s.id_sala=?";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         Room room = new Room();
         try {
@@ -37,7 +37,7 @@ public class RoomPostgreDAO implements RoomDAO{
 	
 	public boolean insertRoom(Room room) {
 		String Query = "INSERT INTO sale(descrizione, sistema_audio, tecnologia_proiezione, posti) VALUES (?, ?, ?, ?);";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         try {
             PreparedStatement ps = con.prepareStatement(Query);
@@ -58,7 +58,7 @@ public class RoomPostgreDAO implements RoomDAO{
 	public LinkedList<Room> getRooms() {
 		String Query = "Select s.id_sala,s.descrizione,s.sistema_audio,(select t.audio from sistemi_audio t where t.id_sound=s.sistema_audio),"
 				+ "s.tecnologia_proiezione,(select t.tecnologia from tecnologie_proiezione t where t.id_tec=s.tecnologia_proiezione),s.posti from sale s order by s.descrizione";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         LinkedList<Room> list = new LinkedList<Room>();
         try {
@@ -85,7 +85,7 @@ public class RoomPostgreDAO implements RoomDAO{
 	
 	public Integer deleteRoom(Integer idroom) {
 		String Query = "DELETE FROM SALE F WHERE F.ID_SALA=?";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         try {
             PreparedStatement ps = con.prepareStatement(Query);

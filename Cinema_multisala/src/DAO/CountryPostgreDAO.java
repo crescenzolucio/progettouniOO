@@ -12,7 +12,7 @@ import Interfaces.CountryDAO;
 public class CountryPostgreDAO implements CountryDAO{
 	public LinkedList<Country> getCountries() {
 		String Query = "Select * from paesi p order by p.paese";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         LinkedList<Country> list = new LinkedList<Country>();
         try {

@@ -5,7 +5,9 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 import java.util.Properties;
 
-public class Connectiondb {
+import Interfaces.ConnectiondbDAO;
+
+public class ConnectiondbPostgreDAO implements ConnectiondbDAO{
 
 	public Connection get_connection() {
     	Connection conn = null;

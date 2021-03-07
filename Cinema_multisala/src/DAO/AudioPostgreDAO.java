@@ -12,7 +12,7 @@ import Interfaces.AudioDAO;
 public class AudioPostgreDAO implements AudioDAO{
 	public LinkedList<Audio> getAudios() {
 		String Query = "SELECT * FROM sistemi_audio a order by a.audio asc";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         LinkedList<Audio> list = new LinkedList<Audio>();
         try {

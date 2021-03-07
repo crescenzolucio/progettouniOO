@@ -14,7 +14,7 @@ import Interfaces.ViewDAO;
 public class ViewPostgreDAO implements ViewDAO{
 	public TableModel ProfitableShowsView(){
 		String Query = "SELECT * FROM spettacoli_renumerativi";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
 		DefaultTableModel model = new DefaultTableModel();
         Connection con=connection_db.get_connection();
         try {
@@ -38,7 +38,7 @@ public class ViewPostgreDAO implements ViewDAO{
 	
 	public TableModel PrimeTimeView(){
 		String Query = "SELECT * FROM orari_maggiore_affluenza";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
 		DefaultTableModel model = new DefaultTableModel();
         Connection con=connection_db.get_connection();
         try {
@@ -62,7 +62,7 @@ public class ViewPostgreDAO implements ViewDAO{
 	public TableModel PrimeTimeRoomsView(){
 		String Query = "SELECT * FROM affluenza_sale_orari_max";
 		Controller controller = new Controller();
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
 		DefaultTableModel model = new DefaultTableModel();
         Connection con=connection_db.get_connection();
         try {

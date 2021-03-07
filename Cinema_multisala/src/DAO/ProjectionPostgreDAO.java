@@ -14,7 +14,7 @@ public class ProjectionPostgreDAO implements ProjectionDAO{
 	
 	public LinkedList<Projection> getProjectionsToday() {
 		String Query = "Select * from proiezioni p where p.inizio_proiezione::date=current_date";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         LinkedList<Projection> list = new LinkedList<Projection>();
         try {
@@ -41,7 +41,7 @@ public class ProjectionPostgreDAO implements ProjectionDAO{
 	
 	public Integer countOccupiedSeatsInProjection(Integer id_projection) {
 		String Query = "select count(*) from biglietti b where b.id_proiezione="+id_projection;
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         Integer count = 0;
         try {
@@ -60,7 +60,7 @@ public class ProjectionPostgreDAO implements ProjectionDAO{
 	
 	public boolean insertProjection(Projection projection) {
 		String Query = "INSERT INTO proiezioni(id_sala, id_film, prezzo, inizio_proiezione,fine_proiezione) VALUES (?, ?, ?, ?, ?);";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         try {
             PreparedStatement ps = con.prepareStatement(Query);
@@ -83,7 +83,7 @@ public class ProjectionPostgreDAO implements ProjectionDAO{
 		String Query = "Select p.*,"
 				+ "	(select s.descrizione from sale s where s.id_sala=p.id_sala),"
 				+ "	(select f.titolo from film f where f.id_film=p.id_film) from proiezioni p ";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         LinkedList<Projection> list = new LinkedList<Projection>();
         try {
@@ -111,7 +111,7 @@ public class ProjectionPostgreDAO implements ProjectionDAO{
 
 	public Integer deleteProjection(Integer idpj) {
 		String Query = "DELETE FROM PROIEZIONI F WHERE F.ID_PROIEZIONE=?";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         try {
             PreparedStatement ps = con.prepareStatement(Query);

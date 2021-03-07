@@ -10,7 +10,7 @@ import Interfaces.TicketDAO;
 public class TicketPostgreDAO implements TicketDAO{
 	public boolean buyTicket(Ticket ticket) {
 		String Query = "INSERT INTO BIGLIETTI (id_proiezione, id_biglietto, sconto, prezzofinale) VALUES(?,?,?,?)";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         try {
             PreparedStatement ps = con.prepareStatement(Query);
@@ -29,7 +29,7 @@ public class TicketPostgreDAO implements TicketDAO{
 	
 	public Integer lastTicket() {
 		String Query = "Select max(b.id_biglietto) from biglietti b";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         try {
             PreparedStatement ps = con.prepareStatement(Query);

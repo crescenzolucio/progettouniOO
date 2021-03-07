@@ -12,7 +12,7 @@ import Interfaces.GenreDAO;
 public class GenrePostgreDAO implements GenreDAO{
 	public LinkedList<Genre> getGenres(){
 			String Query = "Select * from generi g order by g.genere";
-			Connectiondb connection_db =new Connectiondb();
+			ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
 	        Connection con=connection_db.get_connection();
 	        LinkedList<Genre> list = new LinkedList<Genre>();
 	        try {
@@ -33,7 +33,7 @@ public class GenrePostgreDAO implements GenreDAO{
 	}
 	public Genre getGenre(Integer idgenre) {
 		String Query = "Select * from generi g where g.id_genere=?";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         Genre genre = new Genre();
         try {

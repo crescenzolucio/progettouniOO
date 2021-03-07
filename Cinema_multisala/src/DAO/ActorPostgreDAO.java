@@ -14,7 +14,7 @@ public class ActorPostgreDAO implements ActorDAO{
 	
 		public LinkedList<Actor> findActors() {
 			String Query = "SELECT * FROM attori a order by a.nominativo asc";
-			Connectiondb connection_db =new Connectiondb();
+			ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
 	        Connection con=connection_db.get_connection();
 	        LinkedList<Actor> list = new LinkedList<Actor>();
 	        try {
@@ -38,7 +38,7 @@ public class ActorPostgreDAO implements ActorDAO{
 		
 		public boolean insertActor(Actor actor) {
 			String Query = "INSERT INTO public.attori( nominativo, paese_di_origine, data_nascita) VALUES (?, ?, ?)";
-			Connectiondb connection_db =new Connectiondb();
+			ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
 	        Connection con=connection_db.get_connection();
 	        try {
 	            PreparedStatement ps = con.prepareStatement(Query);
@@ -57,7 +57,7 @@ public class ActorPostgreDAO implements ActorDAO{
 		
 		public Actor getActor(Integer idactor) {
 			String Query = "Select * from attori a where a.id_attore=?";
-			Connectiondb connection_db =new Connectiondb();
+			ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
 	        Connection con=connection_db.get_connection();
 	        Actor actor = new Actor();
 	        try {

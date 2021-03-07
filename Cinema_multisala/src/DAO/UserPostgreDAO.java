@@ -12,7 +12,7 @@ public class UserPostgreDAO implements UserDAO{
 
 	public boolean findUser(String user) {
 		String Query = "Select * from utenti u where u.username=?";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         boolean check = false;
         try {
@@ -33,7 +33,7 @@ public class UserPostgreDAO implements UserDAO{
 
 	public boolean checkPassword(String user,String password) {
 		String Query = "Select * from utenti u where u.username=?";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         boolean check = false;
         try {
@@ -55,7 +55,7 @@ public class UserPostgreDAO implements UserDAO{
 	
 	public boolean addUser(String user, String password, String email) {
 		String Query = "INSERT INTO UTENTI VALUES (?,?,?)";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         boolean check = false;
         try {

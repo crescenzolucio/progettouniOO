@@ -13,7 +13,7 @@ import Interfaces.DirectorDAO;
 public class DirectorPostgreDAO implements DirectorDAO{
 	public LinkedList<Director> findDirectors() {
 		String Query = "SELECT * FROM registi r order  by r.nominativo asc";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         LinkedList<Director> list = new LinkedList<Director>();
         try {
@@ -36,7 +36,7 @@ public class DirectorPostgreDAO implements DirectorDAO{
 	
 	public Director findDirector(Integer iddirector) {
 		String Query = "SELECT r.id_regista,r.nominativo,(select p.paese from paesi p where p.id_paese=r.paese_di_origine::smallint),r.data_nascita FROM registi r  where r.id_regista=?";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         Director director = new Director();
         try {
@@ -58,7 +58,7 @@ public class DirectorPostgreDAO implements DirectorDAO{
 	
 	public boolean insertDirector(Director director) {
 		String Query = "INSERT INTO public.registi( nominativo, paese_di_origine, data_nascita) VALUES (?, ?, ?)";
-		Connectiondb connection_db =new Connectiondb();
+		ConnectiondbPostgreDAO connection_db =new ConnectiondbPostgreDAO();
         Connection con=connection_db.get_connection();
         try {
             PreparedStatement ps = con.prepareStatement(Query);
