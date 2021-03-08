@@ -166,7 +166,7 @@ public class InsertRoomJframe extends JFrame {
 						JOptionPane.showMessageDialog(null, "Room created!");
 						textFieldDescription.setText(""); textFieldSeats.setText("");
 						comboBoxTechProjection.setSelectedIndex(0); comboBoxAudio.setSelectedIndex(0);
-					}
+					}else JOptionPane.showMessageDialog(null, "Error in creation!");
 				}else JOptionPane.showMessageDialog(null, "Enter all parameters correctly!");
 			}
 		});
