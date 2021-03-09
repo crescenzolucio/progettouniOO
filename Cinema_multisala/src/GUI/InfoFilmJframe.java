@@ -60,12 +60,12 @@ public class InfoFilmJframe extends JFrame {
 		setResizable(false);
 		
     	//Actors
-    	for(Integer idactor : controller.getFilm(idfilm).getActors()) {
+    	for(Integer idactor : film.getActors()) {
     		actors += controller.getActor(idactor).getName()+" ";
     	}
     	
     	//Genres
-    	for(Integer idgenre : controller.getFilm(idfilm).getGenres()) {
+    	for(Integer idgenre : film.getGenres()) {
     		genres += controller.getGenre(idgenre).getGenre()+" ";
     	}
 
