@@ -12,8 +12,6 @@ import Entity.Actor;
 import Entity.Director;
 import Entity.Film;
 import Entity.Genre;
-import Entity.Projection;
-
 import javax.swing.JTextField;
 import javax.swing.ListSelectionModel;
 import javax.swing.JLabel;
@@ -33,11 +31,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.ActionEvent;
 import javax.swing.JComboBox;
 import javax.swing.JList;
-import javax.swing.JScrollBar;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.imageio.ImageIO;
-import javax.swing.ImageIcon;
 
 public class InsertFilmJframe extends JFrame {
 	/**
@@ -80,6 +76,7 @@ public class InsertFilmJframe extends JFrame {
 	    setSize(730, 380);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
 		setTitle("Insert Film");
+		setLocationRelativeTo(null);
 		setResizable(false);
 		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

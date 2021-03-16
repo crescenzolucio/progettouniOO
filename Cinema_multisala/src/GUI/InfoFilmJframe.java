@@ -52,6 +52,7 @@ public class InfoFilmJframe extends JFrame {
 		});
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
 		setTitle("Film info");
+		setLocationRelativeTo(null);
 		setBounds(100, 100, 360, 449);
 		contentPane = new JPanel();
 		contentPane.setBorder(new EmptyBorder(5, 5, 5, 5));
@@ -75,19 +76,19 @@ public class InfoFilmJframe extends JFrame {
 		contentPane.add(lblTitleInfo);
 		
 		JLabel lblGenres = new JLabel("Genres");
-		lblGenres.setBounds(21, 286, 46, 14);
+		lblGenres.setBounds(21, 310, 46, 14);
 		contentPane.add(lblGenres);
 		
 		JLabel lblProducer = new JLabel("Producer");
-		lblProducer.setBounds(21, 311, 58, 14);
+		lblProducer.setBounds(21, 335, 58, 14);
 		contentPane.add(lblProducer);
 		
 		JLabel lblActors = new JLabel("Actors");
-		lblActors.setBounds(21, 336, 46, 14);
+		lblActors.setBounds(21, 360, 46, 14);
 		contentPane.add(lblActors);
 		
 		JLabel lblMinutes = new JLabel("Minutes");
-		lblMinutes.setBounds(21, 361, 46, 14);
+		lblMinutes.setBounds(21, 385, 46, 14);
 		contentPane.add(lblMinutes);
 		
 		//Poster film
@@ -109,27 +110,36 @@ public class InfoFilmJframe extends JFrame {
 		contentPane.add(lblImage);
 		
 		JLabel lblGenresInfo = new JLabel("");
-		lblGenresInfo.setBounds(89, 286, 245, 14);
+		lblGenresInfo.setBounds(89, 310, 245, 14);
 		lblGenresInfo.setText(genres);
 		contentPane.add(lblGenresInfo);
 		
 		JLabel lblProducerInfo = new JLabel("");
-		lblProducerInfo.setBounds(89, 311, 245, 14);
+		lblProducerInfo.setBounds(89, 335, 245, 14);
 		lblProducerInfo.setText(film.getRegistaname());
 		contentPane.add(lblProducerInfo);
 		
 		JLabel lblActorsInfo = new JLabel("");
-		lblActorsInfo.setBounds(89, 336, 245, 14);
+		lblActorsInfo.setBounds(89, 360, 245, 14);
 		lblActorsInfo.setText(actors);
 		contentPane.add(lblActorsInfo);
 		
 		JLabel lblMinutesInfo = new JLabel("");
-		lblMinutesInfo.setBounds(89, 361, 245, 14);
+		lblMinutesInfo.setBounds(89, 385, 245, 14);
 		lblMinutesInfo.setText(film.getMinutes().toString());
 		contentPane.add(lblMinutesInfo);
 		
 		JLabel lblTilte = new JLabel("Title");
 		lblTilte.setBounds(21, 258, 46, 14);
 		contentPane.add(lblTilte);
+		
+		JLabel lblYear = new JLabel("Year");
+		lblYear.setBounds(21, 285, 46, 14);
+		contentPane.add(lblYear);
+		
+		JLabel lblYearInfo = new JLabel("");
+		lblYearInfo.setBounds(89, 285, 245, 14);
+		contentPane.add(lblYearInfo);
+		lblYearInfo.setText(film.getYear_production().toString());
 	}
 }

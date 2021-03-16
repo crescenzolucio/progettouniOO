@@ -65,6 +65,7 @@ public class InsertActorProducerJframe extends JFrame {
 	    setSize(730, 290);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
 		setTitle("Insert Actor/Producer");
+		setLocationRelativeTo(null);
 		setResizable(false);
 		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

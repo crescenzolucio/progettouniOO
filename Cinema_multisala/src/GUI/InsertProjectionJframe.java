@@ -233,6 +233,7 @@ public class InsertProjectionJframe extends JFrame {
 		setSize(732, 307);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
 		setTitle("Projection add");
+		setLocationRelativeTo(null);
 		setResizable(false);
 	}
 }

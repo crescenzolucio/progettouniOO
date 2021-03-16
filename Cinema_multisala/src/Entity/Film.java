@@ -77,5 +77,9 @@ public class Film {
 		this.minutes = minutes;
 		this.url_poster = url_poster;
 	}
+	@Override
+	public String toString() {
+		return  title;
+	}
 }
 	

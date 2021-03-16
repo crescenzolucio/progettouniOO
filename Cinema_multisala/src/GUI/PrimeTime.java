@@ -44,6 +44,7 @@ public class PrimeTime extends JFrame {
 	    setSize(642, 417);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
 		setTitle("Prime Time");
+		setLocationRelativeTo(null);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

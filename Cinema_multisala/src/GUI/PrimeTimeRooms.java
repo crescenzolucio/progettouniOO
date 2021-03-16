@@ -43,7 +43,8 @@ public class PrimeTimeRooms extends JFrame {
 	    
 	    setSize(642, 417);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
-		setTitle("Prime Time");
+		setTitle("Prime Time Rooms");
+		setLocationRelativeTo(null);
 		addWindowListener(new WindowAdapter() {
 			@Override
 			public void windowClosing(WindowEvent e) {

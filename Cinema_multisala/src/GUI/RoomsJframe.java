@@ -66,6 +66,7 @@ public class RoomsJframe extends JFrame {
 	    setSize(screenSize.width/2, screenSize.height/2);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
 		setTitle("Rooms");
+		setLocationRelativeTo(null);
 		setResizable(false);
 		
 		setDefaultCloseOperation(JFrame.DO_NOTHING_ON_CLOSE);

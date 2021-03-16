@@ -64,6 +64,7 @@ public class FilmsJframe extends JFrame {
 		Controller controller = new Controller();
 	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    setSize(screenSize.width/2, screenSize.height/2);
+	    setLocationRelativeTo(null);
 		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
 		setTitle("Films");
 		setResizable(false);
