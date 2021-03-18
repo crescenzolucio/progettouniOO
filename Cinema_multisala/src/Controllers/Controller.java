@@ -14,7 +14,6 @@ import DAO.ProjectionPostgreDAO;
 import DAO.RoomPostgreDAO;
 import DAO.TechnologyPostgreDAO;
 import DAO.TicketPostgreDAO;
-import DAO.UserPostgreDAO;
 import DAO.ViewPostgreDAO;
 import Entity.Actor;
 import Entity.Audio;
@@ -26,7 +25,6 @@ import Entity.Projection;
 import Entity.Room;
 import Entity.Technology;
 import Entity.Ticket;
-import Entity.User;
 import Interfaces.ActorDAO;
 import Interfaces.AudioDAO;
 import Interfaces.CountryDAO;
@@ -37,7 +35,6 @@ import Interfaces.ProjectionDAO;
 import Interfaces.RoomDAO;
 import Interfaces.TechnologyDAO;
 import Interfaces.TicketDAO;
-import Interfaces.UserDAO;
 import Interfaces.ViewDAO;
 
 public class Controller {
@@ -162,19 +159,6 @@ public class Controller {
 	public Integer lastTicket() {
 		TicketDAO ticketDAO = new TicketPostgreDAO();
 		return ticketDAO.lastTicket();
-	}
-	//User
-	public boolean searchUser(String user) {
-		UserDAO usDAO = new UserPostgreDAO();
-		return usDAO.findUser(user);
-	}
-	public boolean checkPasswordUser(String user,String password) {
-		UserDAO usDAO = new UserPostgreDAO();
-		return usDAO.checkPassword(user,password);
-	}
-	public boolean addInfoUser(User user) {
-		UserDAO usDAO = new UserPostgreDAO();
-		return usDAO.addUser(user.getUser(),user.getPassword(),user.getEmail());
 	}
 	//Views
 	public TableModel ProfitableShowsView() {

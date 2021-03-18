@@ -49,8 +49,8 @@ public class ViewPostgreDAO implements ViewDAO{
     		model.setColumnIdentifiers(columnNames);
             while (rs.next()) { 
             	  String influx = rs.getString("affluenza");
-            	  String start = rs.getString("fasciainizio");
-            	  String end = rs.getString("fasciafine");
+            	  String start = rs.getString("fasciainizio").substring(0,5);
+            	  String end = rs.getString("fasciafine").substring(0,5);
             	  model.addRow(new Object[]{influx, start, end});
             	}
             con.close();
@@ -74,8 +74,8 @@ public class ViewPostgreDAO implements ViewDAO{
             	  String count = rs.getString("conta");
             	  Room roomobj = controller.nameRoom(Integer.parseInt(rs.getString("id_sala")));
             	  String room = roomobj.getDescription();
-            	  String start = rs.getString("fasciainizio");
-            	  String end = rs.getString("fasciafine");
+            	  String start = rs.getString("fasciainizio").substring(0,5);
+            	  String end = rs.getString("fasciafine").substring(0,5);
             	  model.addRow(new Object[]{count, room, start,end});
             	}
             con.close();

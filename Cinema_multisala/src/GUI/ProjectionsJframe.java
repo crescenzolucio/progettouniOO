@@ -64,7 +64,7 @@ public class ProjectionsJframe extends JFrame {
 	    Dimension screenSize = Toolkit.getDefaultToolkit().getScreenSize();
 	    
 	    setSize(screenSize.width/2, screenSize.height/2);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TodayProjectionsJframe.class.getResource("/Images/logo.png")));
 		setTitle("Today Projections");
 		setLocationRelativeTo(null);
 		setResizable(false);

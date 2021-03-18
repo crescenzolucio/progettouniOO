@@ -74,7 +74,7 @@ public class InsertFilmJframe extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 	    setSize(730, 380);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TodayProjectionsJframe.class.getResource("/Images/logo.png")));
 		setTitle("Insert Film");
 		setLocationRelativeTo(null);
 		setResizable(false);

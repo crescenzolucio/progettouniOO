@@ -63,7 +63,7 @@ public class InsertActorProducerJframe extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 	    setSize(730, 290);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TodayProjectionsJframe.class.getResource("/Images/logo.png")));
 		setTitle("Insert Actor/Producer");
 		setLocationRelativeTo(null);
 		setResizable(false);

@@ -211,17 +211,21 @@ public class InsertProjectionJframe extends JFrame {
 					System.out.println(timestart);
 					System.out.println(timeend);
 					
-					//diff hours between calendars end-start
-					int hours = (int) (seconds / 3600);
+					//diff hours/minutes between calendars end-start
+					Integer hours = (int) (seconds / 3600);
+					Integer minutes = (int) (seconds / 60);
 					System.out.println(hours);
+					System.out.println(minutes+" "+controller.getFilm(idfilm).getMinutes());
 					if(price >=0){
 						if(hours <= 24 && hours >= 0){
-							if(controller.insertProjection(pj)){
-								JOptionPane.showMessageDialog(null, "Projection created!");
-								comboBoxRoom.setSelectedIndex(0); comboBoxFilm.setSelectedIndex(0);	textFieldPrice.setText("");
-								dateChooserEnd.setDate(new Date()); spinnerStartHour.setValue(0); spinnerEndHour.setValue(0);
-								spinnerStartMinutes.setValue(0); spinnerEndMinutes.setValue(0); dateChooserStart.setDate(new Date()); 
-							}
+							if(minutes >=  controller.getFilm(idfilm).getMinutes()){
+								if(controller.insertProjection(pj)){
+									JOptionPane.showMessageDialog(null, "Projection created!");
+									comboBoxRoom.setSelectedIndex(0); comboBoxFilm.setSelectedIndex(0);	textFieldPrice.setText("");
+									dateChooserEnd.setDate(new Date()); spinnerStartHour.setValue(0); spinnerEndHour.setValue(0);
+									spinnerStartMinutes.setValue(0); spinnerEndMinutes.setValue(0); dateChooserStart.setDate(new Date()); 
+								}
+							}else JOptionPane.showMessageDialog(null, "The duration of the projection doesn't agree with duration of the film!");
 						}else JOptionPane.showMessageDialog(null, "The projection hours must be between 0 and 24!");
 					}else JOptionPane.showMessageDialog(null, "The price cannot be negative!");
 				}else JOptionPane.showMessageDialog(null, "Enter all parameters correctly!");
@@ -231,7 +235,7 @@ public class InsertProjectionJframe extends JFrame {
 		contentPane.add(btnInsert);
 		
 		setSize(732, 307);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TodayProjectionsJframe.class.getResource("/Images/logo.png")));
 		setTitle("Projection add");
 		setLocationRelativeTo(null);
 		setResizable(false);

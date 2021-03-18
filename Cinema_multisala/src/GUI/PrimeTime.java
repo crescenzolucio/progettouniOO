@@ -42,7 +42,7 @@ public class PrimeTime extends JFrame {
 		Controller controller = new Controller();
 	    
 	    setSize(642, 417);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TodayProjectionsJframe.class.getResource("/Images/logo.png")));
 		setTitle("Prime Time");
 		setLocationRelativeTo(null);
 		addWindowListener(new WindowAdapter() {

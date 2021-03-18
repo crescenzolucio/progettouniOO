@@ -63,7 +63,7 @@ public class InsertRoomJframe extends JFrame {
 		setContentPane(contentPane);
 		contentPane.setLayout(null);
 	    setSize(732, 307);
-		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TodayProjectionsJframe.class.getResource("/Images/logo.png")));
 		setTitle("Rooms add");
 		setLocationRelativeTo(null);
 		setResizable(false);

@@ -50,7 +50,7 @@ public class InfoFilmJframe extends JFrame {
 				dispose();
 			}
 		});
-		setIconImage(Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/logo.png")));
+		setIconImage(Toolkit.getDefaultToolkit().getImage(TodayProjectionsJframe.class.getResource("/Images/logo.png")));
 		setTitle("Film info");
 		setLocationRelativeTo(null);
 		setBounds(100, 100, 360, 449);
@@ -99,10 +99,10 @@ public class InfoFilmJframe extends JFrame {
 				url = new URL(film.getUrl_poster());
 				image = ImageIO.read(url);
 			}else {
-				image = Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/no-image.png"));
+				image = Toolkit.getDefaultToolkit().getImage(TodayProjectionsJframe.class.getResource("/Images/no-image.png"));
 			}
 		} catch (IOException e) {
-			image = Toolkit.getDefaultToolkit().getImage(LoginJframe.class.getResource("/Images/no-image.png"));
+			image = Toolkit.getDefaultToolkit().getImage(TodayProjectionsJframe.class.getResource("/Images/no-image.png"));
 		}
 		
 		JLabel lblImage = new JLabel(new ImageIcon(image.getScaledInstance(280, 229, DO_NOTHING_ON_CLOSE)));
